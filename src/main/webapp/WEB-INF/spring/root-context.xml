@@ -19,10 +19,10 @@
       -->
     <property name="mapperLocations" value="classpath*:mybatis/mappers/**/*.xml" />
     <!--
-      com.grepp.spring.app.model 패키지 하위의
+      coffeemanager.app.model 패키지 하위의
       모든 클래스의 full name 을 클래스 이름으로 별칭 등록
       -->
-    <property name="typeAliasesPackage" value="com.grepp.spring.app.model" />
+    <property name="typeAliasesPackage" value="coffeemanager.app.model" />
     <property name="configuration">
       <bean class="org.apache.ibatis.session.Configuration">
         <property name="mapUnderscoreToCamelCase" value="true"/>
@@ -34,7 +34,7 @@
     <constructor-arg index="0" ref="sqlSessionFactory" />
   </bean>
 
-  <mybatis:scan base-package="com.grepp.spring.app.model" annotation="org.apache.ibatis.annotations.Mapper"/>
-  <context:component-scan base-package="com.grepp.spring"/>
+  <mybatis:scan base-package="coffeemanager.app.model" annotation="org.apache.ibatis.annotations.Mapper"/>
+  <context:component-scan base-package="coffeemanager"/>
 
 </beans>
