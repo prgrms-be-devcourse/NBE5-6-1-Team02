@@ -29,10 +29,10 @@
 //    @WithMockUser(username = "test")
 //    public void preAuthorized(){
 //        Member member = new Member();
-//        member.setUserId("test");
+//        member.setEmail("test@aaa.aaa");
 //        securityTestService.testPreAuthorize(member);
 //    }
-//    
+//
 //    @Test
 //    @WithMockUser(username = "test")
 //    public void preAuthorized_throwEx_authorizeDenied(){

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberRepository {
 
-    Optional<Member> selectById(String email);
+    Optional<Member> selectByEmail(String email);
     
     @Select("select count(*) from member where USER_Email = #{email}")
     Boolean existsMember(String email);

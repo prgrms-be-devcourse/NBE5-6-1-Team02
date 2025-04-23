@@ -109,10 +109,10 @@
 <div class="login-container">
     <div class="header-decoration"></div>
     <h2>로그인</h2>
-    <form:form modelAttribute="signinForm" action="/member/signin" method="post">
+    <form:form modelAttribute="signinForm" action="/member/member-login" method="post">
         <div class="form-group">
             <label for="email">아이디</label>
-            <form:input path="email" id="email" placeholder="아이디를 입력하세요" cssClass="form-control"/>
+            <form:input path="email" id="email" placeholder="이메일을 입력하세요" cssClass="form-control"/>
             <form:errors path="email" cssClass="helper-text"/>
         </div>
         <div class="form-group">

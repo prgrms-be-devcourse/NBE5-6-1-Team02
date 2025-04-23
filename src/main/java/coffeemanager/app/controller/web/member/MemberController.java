@@ -4,7 +4,10 @@ package coffeemanager.app.controller.web.member;
 import coffeemanager.app.controller.web.member.form.SigninForm;
 import coffeemanager.app.controller.web.member.form.SignupForm;
 import coffeemanager.app.model.member.MemberService;
+import coffeemanager.app.model.member.dto.Principal;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -13,7 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -40,11 +43,11 @@ public class MemberController {
         return "member/signup";
     }
 
-    // 다시 로그인 페이지
-    @GetMapping("/redirect-login")
-    public String redirectLogin(){
-        return "member/member-login";
-    }
+//    // 다시 로그인 페이지
+//    @GetMapping("/redirect-login")
+//    public String redirectLogin(){
+//        return "member/member-login";
+//    }
 
     @PostMapping("signup")
     public String signup(
@@ -58,6 +61,24 @@ public class MemberController {
 
         memberService.signup(form.toDto());
 
+        return "redirect:/";
+    }
+
+    @PostMapping("signin")
+    public String signin(
+        @Valid SigninForm form,
+        BindingResult bindingResult,
+        HttpSession session){
+
+        log.info("log form!!!!!! : {}",form);
+
+        if(bindingResult.hasErrors()){
+            return "member/member-login";
+        }
+
+        Principal principal = memberService.signin(form.getEmail(), form.getPassword());
+
+        session.setAttribute("principal", principal);
         return "redirect:/";
     }
 }

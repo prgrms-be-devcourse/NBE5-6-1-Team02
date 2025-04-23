@@ -21,13 +21,11 @@ public class AuthService implements UserDetailsService {
     
     private final MemberRepository memberRepository;
 
-    
-    
     @Override
-    public UserDetails loadUserByUsername(String username){
+    public UserDetails loadUserByUsername(String email){
         
-        Member member = memberRepository.selectById(username)
-                            .orElseThrow(() -> new UsernameNotFoundException(username));
+        Member member = memberRepository.selectByEmail(email)
+                            .orElseThrow(() -> new UsernameNotFoundException(email));
         
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(member.getRole().name()));

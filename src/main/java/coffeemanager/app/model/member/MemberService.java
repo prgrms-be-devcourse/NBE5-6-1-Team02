@@ -24,8 +24,8 @@ public class MemberService{
     
     @Transactional
     public void signup(Member dto) {
-//        if(memberRepository.existsMember(dto.getEmail()))
-//            throw new CommonException(ResponseCode.BAD_REQUEST);
+        if(memberRepository.existsMember(dto.getEmail()))
+            throw new CommonException(ResponseCode.BAD_REQUEST);
         
         String encodedPassword = passwordEncoder.encode(dto.getPassword());
         dto.setPassword(encodedPassword);
@@ -33,21 +33,21 @@ public class MemberService{
         memberRepository.insert(dto);
     }
     
-    public Principal signin(String userId, String password) {
+    public Principal signin(String email, String password) {
         
-        Optional<Member> optional = memberRepository.selectById(userId);
+        Optional<Member> optional = memberRepository.selectByEmail(email);
 
         Member member = optional.get();
 
-        return new Principal(userId, List.of(Role.ROLE_USER), LocalDateTime.now());
+        return new Principal(email, List.of(Role.ROLE_USER), LocalDateTime.now());
     }
     
-    public Boolean isDuplicatedId(String id) {
-        return memberRepository.existsMember(id);
+    public Boolean isDuplicatedId(String email) {
+        return memberRepository.existsMember(email);
     }
     
-    public Member findById(String userId) {
-        return memberRepository.selectById(userId)
+    public Member findByEmail(String email) {
+        return memberRepository.selectByEmail(email)
                             .orElseThrow(() -> new CommonException(ResponseCode.BAD_REQUEST));
     }
 }
