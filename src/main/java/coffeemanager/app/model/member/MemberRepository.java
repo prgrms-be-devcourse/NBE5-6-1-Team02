@@ -1,7 +1,6 @@
 package coffeemanager.app.model.member;
 
 import coffeemanager.app.model.member.dto.Member;
-import coffeemanager.app.model.member.dto.MemberInfo;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,10 +16,8 @@ public interface MemberRepository {
     @Select("select count(*) from member where user_id = #{userId}")
     Boolean existsMember(String userId);
     
-    @Insert("insert into member (USER_ID, PASSWORD, EMAIL, TEL, ROLE) "
-                + "values(#{userId}, #{password}, #{email}, #{tel}, #{role})")
+    @Insert("insert into member (USER_Email, PASSWORD, TEL, ADDRESS,ZIPCODE) "
+                + "values(#{email}, #{password},#{tel},#{address},#{zipcode})")
     void insert(Member dto);
-    
-    @Insert("insert into member_info(USER_ID) values (#{userId})")
-    void insertInfo(MemberInfo memberInfo);
+
 }

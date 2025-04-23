@@ -1,11 +1,16 @@
 package coffeemanager.app.controller.web.member;
 
 
+import coffeemanager.app.controller.web.member.form.SignupForm;
 import coffeemanager.app.model.member.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -29,7 +34,7 @@ public class MemberController {
 
     // 회원가입 페이지
     @GetMapping("/signup")
-    public String signup(){
+    public String signup(SignupForm form){
         return "member/signup";
     }
 
@@ -39,15 +44,19 @@ public class MemberController {
         return "member/member-login";
     }
 
-//    @PostMapping("signin")
-//    public String signin(
-//        @Valid SigninForm form,
-//        BindingResult bindingResult){
-//
-//        if(bindingResult.hasErrors()){
-//            return "member/signin";
-//        }
+    @PostMapping("signup")
+    public String signup(
+        @Valid SignupForm form,
+        BindingResult bindingResult,
+        Model model) {
 
+        if (bindingResult.hasErrors()) {
+            return "member/signup";
+        }
 
+        memberService.signup(form.toDto());
+
+        return "redirect:/";
+    }
 }
 

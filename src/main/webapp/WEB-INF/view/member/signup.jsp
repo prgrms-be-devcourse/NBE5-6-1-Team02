@@ -153,9 +153,9 @@
     </div>
 
     <div class="form-group">
-      <label for="zipcode">우편번호</label>
-      <form:input path="zipcode" id="zipcode" placeholder="우편번호를 입력하세요" />
-      <form:errors path="zipcode" cssClass="helper-text" />
+      <label for="zipCode">우편번호</label>
+      <form:input path="zipCode" id="zipCode" placeholder="우편번호를 입력하세요" />
+      <form:errors path="zipCode" cssClass="helper-text" />
     </div>
 
     <button type="submit" class="signup-btn">회원가입</button>

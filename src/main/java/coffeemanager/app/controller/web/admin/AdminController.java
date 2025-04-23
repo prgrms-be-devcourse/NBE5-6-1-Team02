@@ -38,7 +38,7 @@ public class AdminController {
             return "admin/signup";
         }
         
-        memberService.signup(form.toDto(), Role.ROLE_ADMIN);
+        memberService.signup(form.toDto());
         return "redirect:/";
     }
 }
