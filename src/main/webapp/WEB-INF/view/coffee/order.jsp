@@ -47,7 +47,6 @@
                     <li class="list-group-item d-flex mt-3">
                         <div class="col-2"><img class="img-fluid" src="${product.imageUrl}" alt=""></div>
                         <div class="col">
-                            <div class="text-muted">${product.type}</div>
                             <div>${product.name}</div>
                         </div>
                         <div class="col text-center">${product.price}원</div>

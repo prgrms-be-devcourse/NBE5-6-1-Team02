@@ -1,5 +1,9 @@
 package coffeemanager.app.repository;
 
-public interface CoffeeRepository {
+import coffeemanager.app.model.coffee.Coffee;
+import java.util.List;
 
+public interface CoffeeRepository {
+    List<Coffee> findAllCoffees();
+    Coffee findCoffeeById(int coffeeId);
 }
