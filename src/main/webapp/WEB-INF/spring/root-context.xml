@@ -34,7 +34,7 @@
     <constructor-arg index="0" ref="sqlSessionFactory" />
   </bean>
 
-  <mybatis:scan base-package="coffeemanager.app.model" annotation="org.apache.ibatis.annotations.Mapper"/>
+  <mybatis:scan base-package="coffeemanager" annotation="org.apache.ibatis.annotations.Mapper"/>
   <context:component-scan base-package="coffeemanager"/>
 
 </beans>

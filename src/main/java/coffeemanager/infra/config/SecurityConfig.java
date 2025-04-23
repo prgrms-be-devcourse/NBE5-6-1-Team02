@@ -66,7 +66,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http
+/*        http
             .authorizeHttpRequests(
                 (requests) -> requests
                                   .requestMatchers(GET, "/", "/assets/**", "/download/**").permitAll()
@@ -87,7 +87,7 @@ public class SecurityConfig {
                                      .permitAll()
             )
             .rememberMe(rememberMe -> rememberMe.key(rememberMeKey))
-            .logout(LogoutConfigurer::permitAll);
+            .logout(LogoutConfigurer::permitAll);*/
         
         return http.build();
     }
