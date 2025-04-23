@@ -63,23 +63,5 @@ public class MemberController {
 
         return "redirect:/";
     }
-
-    @PostMapping("signin")
-    public String signin(
-        @Valid SigninForm form,
-        BindingResult bindingResult,
-        HttpSession session){
-
-        log.info("log form!!!!!! : {}",form);
-
-        if(bindingResult.hasErrors()){
-            return "member/member-login";
-        }
-
-        Principal principal = memberService.signin(form.getEmail(), form.getPassword());
-
-        session.setAttribute("principal", principal);
-        return "redirect:/";
-    }
 }
 

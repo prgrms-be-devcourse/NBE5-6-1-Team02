@@ -10,7 +10,7 @@
 <%@include file="/WEB-INF/view/include/sidenav.jsp" %>
 
 <main class="container">
-    <h4><c:out value="${member.userId}"/></h4>
+    <h4><c:out value="${member.email}"/></h4>
     <h4><c:out value="${member.tel}"/></h4>
 </main>
 
