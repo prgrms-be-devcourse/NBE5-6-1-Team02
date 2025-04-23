@@ -5,13 +5,13 @@
 <mapper namespace="coffeemanager.app.repository.OrderRepository">
 
   <insert id="insertOrder" useGeneratedKeys="true" keyProperty="id">
-    INSERT INTO orders (email, address, postcode, total_price, order_date)
+    INSERT INTO order (email, address, postcode, total_price, order_date)
     VALUES (#{email}, #{address}, #{postcode}, #{totalPrice}, #{orderDate})
   </insert>
 
   <insert id="insertOrderCoffee">
-    INSERT INTO ordercoffee (order_id, coffee_id, quantity)
-    VALUES (#{orderId}, #{coffeeId}, #{quantity})
+    INSERT INTO order_coffee (order_no, coffee_name, coffee_id, quantity)
+    VALUES (#{orderNo}, #{coffeeName}, #{coffeeId}, #{quantity})
   </insert>
 
 </mapper>

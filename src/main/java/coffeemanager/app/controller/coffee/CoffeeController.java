@@ -3,7 +3,8 @@ package coffeemanager.app.controller.coffee;
 import coffeemanager.app.model.coffee.CartItem;
 import coffeemanager.app.model.coffee.Coffee;
 import coffeemanager.app.service.CoffeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,21 +17,19 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@Slf4j
+@RequiredArgsConstructor
 public class CoffeeController {
 
     private final CoffeeService coffeeService;
 
-    @Autowired
-    public CoffeeController(CoffeeService coffeeService) {
-        this.coffeeService = coffeeService;
-    }
-
-    @GetMapping("/coffee/list")
+    @GetMapping("/coffee/order")
     public String coffeeList(Model model, HttpSession session) {
         List<Coffee> coffeeList = coffeeService.getAllCoffees();
         model.addAttribute("products", coffeeList);
 
         // 장바구니 정보가 있으면 모델에 추가
+        @SuppressWarnings("unchecked") // 강제 형변환 문제 발생 시 조치 예정
         Map<Long, CartItem> cart = (Map<Long, CartItem>) session.getAttribute("cart");
         if (cart != null && !cart.isEmpty()) {
             model.addAttribute("cartItems", cart.values());
@@ -42,10 +41,10 @@ public class CoffeeController {
             model.addAttribute("totalPrice", totalPrice);
         }
 
-        return "coffee/list"; // coffee 디렉토리의 list.jsp를 찾음
+        return "coffee/order"; // coffee 디렉토리의 list.jsp를 찾음
     }
 
-    @GetMapping("/cart/add")
+    @GetMapping("/cart/add") // postMapping 과 연결되는지 확인 필요
     public String addToCart(@RequestParam("id") Long coffeeId,
         HttpSession session,
         RedirectAttributes redirectAttributes) {
@@ -54,7 +53,7 @@ public class CoffeeController {
 
         if (coffee == null) {
             redirectAttributes.addFlashAttribute("error", "상품을 찾을 수 없습니다.");
-            return "redirect:/coffee/list";
+            return "redirect:/coffee/order";
         }
 
         // 세션에서 장바구니 가져오기
@@ -72,7 +71,7 @@ public class CoffeeController {
         } else {
             // 새 상품이면 장바구니에 추가
             CartItem newItem = new CartItem();
-            newItem.setId(coffeeId);
+            newItem.setCoffeeId(coffeeId);
             newItem.setName(coffee.getName());
             newItem.setPrice(coffee.getPrice());
             newItem.setQuantity(1);
@@ -83,7 +82,7 @@ public class CoffeeController {
         session.setAttribute("cart", cart);
 
         redirectAttributes.addFlashAttribute("message", coffee.getName() + "이(가) 장바구니에 추가되었습니다.");
-        return "redirect:/coffee/list";
+        return "redirect:/coffee/order";
     }
 /*
     @GetMapping("/order")

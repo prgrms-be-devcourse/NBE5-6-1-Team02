@@ -12,11 +12,4 @@ public class CartItem {
     private int quantity;
     private int price;
 
-    public CartItem(Long coffeeId, String name, int quantity, int price) {
-        this.coffeeId = coffeeId;
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
-    }
-
 }

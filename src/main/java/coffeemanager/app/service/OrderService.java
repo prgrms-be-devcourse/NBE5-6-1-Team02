@@ -34,7 +34,8 @@ public class OrderService {
 
         // 2. 주문 커피 정보 저장
         for (CartItem item : cart.values()) {
-            orderRepository.insertOrderCoffee(order.getId(), item.getCoffeeId(), item.getQuantity());
+            orderRepository.insertOrderCoffee(order.getId(), item.getCoffeeId(),
+                item.getName(), item.getQuantity());
         }
     }
 }
