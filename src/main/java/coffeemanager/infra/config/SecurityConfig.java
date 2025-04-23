@@ -54,7 +54,7 @@ public class SecurityConfig {
                     return;
                 }
 
-                response.sendRedirect("/");
+                response.sendRedirect("/member/mypage");
             }
         };
 
@@ -71,6 +71,7 @@ public class SecurityConfig {
                     .requestMatchers(GET, "/api/book/list").permitAll()
                     .requestMatchers(GET, "/api/member/exists/*").permitAll()
                     .requestMatchers(GET, "/member/signup").permitAll()
+                    .requestMatchers(GET, "/admin/**").permitAll()
                     .requestMatchers(GET, "/member/guest-login").permitAll()
                     .requestMatchers(GET, "/member/member-login").permitAll()
                     .requestMatchers(POST, "/member/member-login", "/member/signup").permitAll()

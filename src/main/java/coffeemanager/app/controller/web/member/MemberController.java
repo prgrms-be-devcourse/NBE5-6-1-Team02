@@ -37,17 +37,16 @@ public class MemberController {
     @GetMapping("/guest-login")
     public String noUserLogin(){return "member/guest-login";}
 
+    @GetMapping("/mypage")
+    public String myPage(Model model){
+        return "member/mypage";
+    }
+
     // 회원가입 페이지
     @GetMapping("/signup")
     public String signup(SignupForm form){
         return "member/signup";
     }
-
-//    // 다시 로그인 페이지
-//    @GetMapping("/redirect-login")
-//    public String redirectLogin(){
-//        return "member/member-login";
-//    }
 
     @PostMapping("signup")
     public String signup(

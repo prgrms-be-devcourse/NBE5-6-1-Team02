@@ -68,9 +68,6 @@
     <a href="member/member-login" class="login-btn">회원 주문하기</a>
     <a href="member/signup" class="login-btn">회원가입</a>
     <a href="member/guest-login" class="login-btn">비회원 주문하기</a>
-    <sec:authorize access="isAuthenticated()">
-        <a href="member/mypage" class="login-btn">마이페이지</a>
-    </sec:authorize>
 </div>
 </body>
 </html>
