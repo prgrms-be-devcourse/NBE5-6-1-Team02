@@ -127,7 +127,7 @@
   <div class="header-decoration"></div>
   <h2>회원정보 수정</h2>
 
-  <form:form modelAttribute="signupForm" method="post" action="/member/signup">
+  <form:form modelAttribute="updateForm" method="post" action="/member/fixinfo">
 
     <div class="form-group">
       <label for="password">비밀번호</label>
