@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,34 +126,43 @@
 <div class="signup-container">
   <div class="header-decoration"></div>
   <h2>회원가입</h2>
-  <form action="register-process" method="post">
-    <div class="form-group">
-      <label for="username">아이디</label>
-      <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>
-    </div>
-    <div class="form-group">
-      <label for="password">비밀번호</label>
-      <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
-    </div>
-    <div class="form-group">
-      <label for="password-confirm">비밀번호 확인</label>
-      <input type="password" id="password-confirm" name="password-confirm" placeholder="비밀번호를 다시 입력하세요" required>
-    </div>
+
+  <form:form modelAttribute="signupForm" method="post" action="/member/signup">
     <div class="form-group">
       <label for="email">이메일</label>
-      <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
+      <form:input path="email" id="email" placeholder="이메일을 입력하세요" />
+      <form:errors path="email" cssClass="helper-text" />
     </div>
+
     <div class="form-group">
-      <label>성별</label>
-      <div class="gender-group">
-        <label><input type="radio" name="gender" value="male" required> 남성</label>
-        <label><input type="radio" name="gender" value="female"> 여성</label>
-      </div>
+      <label for="password">비밀번호</label>
+      <form:password path="password" id="password" placeholder="비밀번호를 입력하세요" />
+      <form:errors path="password" cssClass="helper-text" />
     </div>
+
+    <div class="form-group">
+      <label for="tel">전화번호</label>
+      <form:input path="tel" id="tel" placeholder="전화번호를 입력하세요" />
+      <form:errors path="tel" cssClass="helper-text" />
+    </div>
+
+    <div class="form-group">
+      <label for="address">주소</label>
+      <form:input path="address" id="address" placeholder="주소를 입력하세요" />
+      <form:errors path="address" cssClass="helper-text" />
+    </div>
+
+    <div class="form-group">
+      <label for="zipcode">우편번호</label>
+      <form:input path="zipcode" id="zipcode" placeholder="우편번호를 입력하세요" />
+      <form:errors path="zipcode" cssClass="helper-text" />
+    </div>
+
     <button type="submit" class="signup-btn">회원가입</button>
-  </form>
+  </form:form>
+
   <div class="extra-links">
-    <a href="member/login">이미 계정이 있으신가요? 로그인</a>
+    <a href="/member/signin">이미 계정이 있으신가요? 로그인</a>
   </div>
 </div>
 </body>

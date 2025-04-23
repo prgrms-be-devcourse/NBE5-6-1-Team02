@@ -5,14 +5,13 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 @Data
-@Alias("Member")
 public class Member {
     
-    private String userId;
+    private String userEmail;
     private String password;
-    private String email;
-    private Role role;
+//    private Role role;
     private String tel;
-    private MemberInfo info;
+    private String address;
+    private String zipcode;
     private Boolean activated;
 }
