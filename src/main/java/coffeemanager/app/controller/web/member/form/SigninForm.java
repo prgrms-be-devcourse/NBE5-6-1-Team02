@@ -1,5 +1,6 @@
 package coffeemanager.app.controller.web.member.form;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -8,7 +9,8 @@ import lombok.Data;
 public class SigninForm {
     
     @NotBlank
-    private String userId;
+    @Email
+    private String email;
     
     @NotBlank
     @Size(min = 4, max = 10)

@@ -162,7 +162,7 @@
   </form:form>
 
   <div class="extra-links">
-    <a href="/member/signin">이미 계정이 있으신가요? 로그인</a>
+    <a href="/member/member-login">이미 계정이 있으신가요? 로그인</a>
   </div>
 </div>
 </body>

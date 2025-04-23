@@ -109,22 +109,22 @@
 <div class="login-container">
     <div class="header-decoration"></div>
     <h2>로그인</h2>
-    <form:form modelAttribute="signinForm" action="/member/siginin" method="post">
+    <form:form modelAttribute="signinForm" action="/member/signin" method="post">
         <div class="form-group">
-            <label for="username">아이디</label>
-            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>
+            <label for="email">아이디</label>
+            <form:input path="email" id="email" placeholder="아이디를 입력하세요" cssClass="form-control"/>
+            <form:errors path="email" cssClass="helper-text"/>
         </div>
         <div class="form-group">
             <label for="password">비밀번호</label>
-            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+            <form:input path="password" id="password" type="password" placeholder="비밀번호를 입력하세요" cssClass="form-control"/>
+            <form:errors path="password" cssClass="helper-text"/>
         </div>
-        <div class="remember">
-        <p>
+        <div class="form-group">
             <label>
                 <input type="checkbox" name="remember-me" />
                 <span>remember-me?</span>
             </label>
-        </p>
         </div>
         <button type="submit" class="login-btn">로그인</button>
     </form:form>

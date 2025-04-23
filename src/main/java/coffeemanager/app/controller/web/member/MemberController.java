@@ -1,6 +1,7 @@
 package coffeemanager.app.controller.web.member;
 
 
+import coffeemanager.app.controller.web.member.form.SigninForm;
 import coffeemanager.app.controller.web.member.form.SignupForm;
 import coffeemanager.app.model.member.MemberService;
 import jakarta.validation.Valid;
@@ -23,12 +24,13 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    // 로그인 페이지
+    // 로그인 페이지 GET
     @GetMapping("/member-login")
-    public String login(){
+    public String login(SigninForm form){
         return "member/member-login";
     }
 
+    // 비회원 로그인 페이지 GET
     @GetMapping("/guest-login")
     public String noUserLogin(){return "member/guest-login";}
 

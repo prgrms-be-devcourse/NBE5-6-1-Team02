@@ -11,10 +11,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberRepository {
 
-    Optional<Member> selectById(String userId);
+    Optional<Member> selectById(String email);
     
-    @Select("select count(*) from member where user_id = #{userId}")
-    Boolean existsMember(String userId);
+    @Select("select count(*) from member where USER_Email = #{email}")
+    Boolean existsMember(String email);
     
     @Insert("insert into member (USER_Email, PASSWORD, TEL, ADDRESS,ZIPCODE) "
                 + "values(#{email}, #{password},#{tel},#{address},#{zipcode})")
