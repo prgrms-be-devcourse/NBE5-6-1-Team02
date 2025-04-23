@@ -1,7 +1,7 @@
-package coffeemanager.app.controller.web.member;
+package coffeemanager.app.controller.member;
 
-import coffeemanager.app.controller.web.member.form.SigninForm;
-import coffeemanager.app.controller.web.member.form.SignupForm;
+import coffeemanager.app.controller.member.form.SigninForm;
+import coffeemanager.app.controller.member.form.SignupForm;
 import coffeemanager.app.model.member.MemberService;
 import coffeemanager.app.model.auth.code.Role;
 import coffeemanager.app.model.member.dto.Member;

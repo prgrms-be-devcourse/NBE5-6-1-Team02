@@ -1,6 +1,6 @@
-package coffeemanager.app.controller.web.admin;
+package coffeemanager.app.controller.admin;
 
-import coffeemanager.app.controller.web.member.form.SignupForm;
+import coffeemanager.app.controller.member.form.SignupForm;
 import coffeemanager.app.model.auth.code.Role;
 import coffeemanager.app.model.member.MemberService;
 import jakarta.validation.Valid;
