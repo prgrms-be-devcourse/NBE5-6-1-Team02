@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>쇼핑몰 - 회원가입</title>
+  <title>쇼핑몰 - 로그인</title>
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -16,7 +16,7 @@
       min-height: 100vh;
     }
 
-    .signup-container {
+    .login-container {
       background: white;
       padding: 40px;
       border-radius: 15px;
@@ -51,8 +51,7 @@
     }
 
     input[type="text"],
-    input[type="password"],
-    input[type="email"] {
+    input[type="password"] {
       width: 100%;
       padding: 10px;
       border: 1px solid #ddd;
@@ -63,28 +62,12 @@
     }
 
     input[type="text"]:focus,
-    input[type="password"]:focus,
-    input[type="email"]:focus {
+    input[type="password"]:focus {
       border-color: #3498db;
       outline: none;
     }
 
-    .gender-group {
-      display: flex;
-      gap: 20px;
-    }
-
-    .gender-group label {
-      display: inline-flex;
-      align-items: center;
-      color: #666;
-    }
-
-    input[type="radio"] {
-      margin-right: 5px;
-    }
-
-    .signup-btn {
+    .login-btn {
       display: block;
       width: 100%;
       padding: 12px;
@@ -99,7 +82,7 @@
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
-    .signup-btn:hover {
+    .login-btn:hover {
       background-color: #2980b9;
       transform: translateY(-2px);
       box-shadow: 0 6px 12px rgba(0,0,0,0.15);
@@ -122,37 +105,18 @@
   </style>
 </head>
 <body>
-<div class="signup-container">
+<div class="login-container">
   <div class="header-decoration"></div>
-  <h2>회원가입</h2>
-  <form action="register-process" method="post">
+  <h2>게스트 로그인</h2>
+  <form action="SigninForm" method="post">
     <div class="form-group">
-      <label for="username">아이디</label>
-      <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>
+      <label for="user-email">이메일</label>
+      <input type="text" id="user-email" name="user-email" placeholder="이메일을 입력하세요" required>
     </div>
-    <div class="form-group">
-      <label for="password">비밀번호</label>
-      <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
-    </div>
-    <div class="form-group">
-      <label for="password-confirm">비밀번호 확인</label>
-      <input type="password" id="password-confirm" name="password-confirm" placeholder="비밀번호를 다시 입력하세요" required>
-    </div>
-    <div class="form-group">
-      <label for="email">이메일</label>
-      <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
-    </div>
-    <div class="form-group">
-      <label>성별</label>
-      <div class="gender-group">
-        <label><input type="radio" name="gender" value="male" required> 남성</label>
-        <label><input type="radio" name="gender" value="female"> 여성</label>
-      </div>
-    </div>
-    <button type="submit" class="signup-btn">회원가입</button>
+    <button type="submit" class="login-btn">주문하러가기</button>
   </form>
   <div class="extra-links">
-    <a href="member/login">이미 계정이 있으신가요? 로그인</a>
+    <a href="/member/signup">회원가입</a>
   </div>
 </div>
 </body>

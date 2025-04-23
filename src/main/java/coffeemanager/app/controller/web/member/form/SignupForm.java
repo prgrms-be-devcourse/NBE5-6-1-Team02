@@ -10,7 +10,7 @@ import lombok.Data;
 public class SignupForm {
     
     @NotBlank
-    private String userId;
+    private String userEmail;
     @NotBlank
     @Size(min = 4, max = 10)
     private String password;
