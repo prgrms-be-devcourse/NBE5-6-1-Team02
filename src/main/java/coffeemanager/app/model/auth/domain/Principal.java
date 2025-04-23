@@ -10,9 +10,9 @@ import org.springframework.security.core.userdetails.User;
 
 public class Principal extends User {
     
-    public Principal(String email, String password,
+    public Principal(String username, String password,
         Collection<? extends GrantedAuthority> authorities) {
-        super(email, password, authorities);
+        super(username, password, authorities);
     }
     
     public static Principal createPrincipal(Member member,

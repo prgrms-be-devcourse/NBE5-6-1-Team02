@@ -22,13 +22,17 @@ public class AuthService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email){
-        
-        Member member = memberRepository.selectByEmail(email)
-                            .orElseThrow(() -> new UsernameNotFoundException(email));
+    public UserDetails loadUserByUsername(String username){
+
+        Member member = memberRepository.selectByEmail(username)
+                            .orElseThrow(() -> new UsernameNotFoundException(username));
         
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(member.getRole().name()));
+
+        log.info("member.getEmail(): {}", member.getEmail());
+        log.info("member.getPassword(): {}", member.getPassword());
+        log.info("authorities: {}", authorities);
 
         // 스프링시큐리티는 기본적으로 권한 앞에 ROLE_ 이 있음을 가정
         // hasRole("ADMIN") =>  ROLE_ADMIN 권한이 있는 지 확인.
