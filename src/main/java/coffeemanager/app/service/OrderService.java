@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class OrderService {
 
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
     public void processOrder(OrderForm form, Map<Long, CartItem> cart) {
         int totalPrice = cart.values().stream()

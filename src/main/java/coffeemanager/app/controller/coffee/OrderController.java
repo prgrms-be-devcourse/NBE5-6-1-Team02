@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private OrderService orderService;
+    private final OrderService orderService;
 
     @PostMapping("/order")
     public String order(@ModelAttribute OrderForm form, HttpSession session,
@@ -26,13 +26,13 @@ public class OrderController {
 
         if (cart == null || cart.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "장바구니가 비어 있습니다.");
-            return "redirect:/coffee/list";
+            return "redirect:/coffee/order";
         }
 
         orderService.processOrder(form, cart);
 
         session.removeAttribute("cart"); // 장바구니 비움
         redirectAttributes.addFlashAttribute("message", "주문이 완료되었습니다!");
-        return "redirect:/coffee/list";
+        return "redirect:/coffee/order";
     }
 }

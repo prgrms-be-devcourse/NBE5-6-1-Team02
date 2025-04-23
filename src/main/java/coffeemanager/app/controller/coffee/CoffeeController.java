@@ -41,7 +41,7 @@ public class CoffeeController {
             model.addAttribute("totalPrice", totalPrice);
         }
 
-        return "coffee/order"; // coffee 디렉토리의 list.jsp를 찾음
+        return "coffee/order"; // coffee 디렉토리의 order.jsp를 찾음
     }
 
     @GetMapping("/cart/add") // postMapping 과 연결되는지 확인 필요
@@ -84,30 +84,5 @@ public class CoffeeController {
         redirectAttributes.addFlashAttribute("message", coffee.getName() + "이(가) 장바구니에 추가되었습니다.");
         return "redirect:/coffee/order";
     }
-/*
-    @GetMapping("/order")
-    public String orderPage(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
-        // 장바구니 정보 가져오기
-        Map<Long, CartItem> cart = (Map<Long, CartItem>) session.getAttribute("cart");
 
-        if (cart == null || cart.isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "장바구니가 비어 있습니다.");
-            return "redirect:/coffee/list";
-        }
-
-        // 상품 목록 가져오기
-        List<Coffee> coffeeList = coffeeService.getAllCoffees();
-
-        // 모델에 데이터 추가
-        model.addAttribute("products", coffeeList);
-        model.addAttribute("cartItems", cart.values());
-
-        // 총 금액 계산
-        int totalPrice = cart.values().stream()
-            .mapToInt(item -> item.getPrice() * item.getQuantity())
-            .sum();
-        model.addAttribute("totalPrice", totalPrice);
-
-        return "order/order"; // order 디렉토리의 order.jsp를 찾음
-    }*/
 }
