@@ -45,14 +45,14 @@
             <ul class="list-group w-100">
                 <c:forEach items="${products}" var="product">
                     <div class="col-2">
-                        <img class="img-fluid" src="${product.thumbnailUrl}">
+                        <img class="img-fluid" src="${product.img}">
                     </div>
                         <div class="col">
                             <div>${product.name}</div>
                         </div>
                         <div class="col text-center">${product.price}원</div>
                         <div class="col text-end">
-                            <a class="btn btn-small btn-outline-dark" href="#" onclick="addToCart('${product.id}')">추가</a>
+                            <a class="btn btn-small btn-outline-dark" href="#" onclick="addToCart('${product.cpIdx}')">추가</a>
                         </div>
                     </li>
                 </c:forEach>

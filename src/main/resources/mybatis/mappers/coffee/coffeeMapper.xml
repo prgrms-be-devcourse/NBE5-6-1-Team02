@@ -5,7 +5,7 @@
 <mapper namespace="coffeemanager.app.repository.CoffeeRepository">
   <select id="findAllCoffees" resultType="coffeemanager.app.model.coffee.Coffee">
     SELECT
-      COFFEE_ID as id,
+      COFFEE_ID as cpIdx,
       COFFEE_NAME as name,
       PRICE as price
     FROM COFFEE
@@ -13,7 +13,7 @@
 
   <select id="findCoffeeById" parameterType="int" resultType="coffeemanager.app.model.coffee.Coffee">
     SELECT
-      COFFEE_ID as id,
+      COFFEE_ID as cpIdx,
       COFFEE_NAME as name,
       PRICE as price
     FROM COFFEE
