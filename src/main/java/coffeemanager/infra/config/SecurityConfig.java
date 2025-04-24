@@ -87,7 +87,7 @@ public class SecurityConfig {
             )
             .rememberMe(rememberMe -> rememberMe.key(rememberMeKey))
             .logout(LogoutConfigurer::permitAll);
-
+        
         return http.build();
     }
 

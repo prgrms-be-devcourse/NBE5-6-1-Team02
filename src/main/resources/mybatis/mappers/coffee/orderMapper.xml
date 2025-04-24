@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="coffeemanager.app.repository.OrderRepository">
+
+  <insert id="insertOrder" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO `order` (email, address, postcode, total_price, order_date)
+    VALUES (#{email}, #{address}, #{postcode}, #{totalPrice}, #{orderDate})
+  </insert>
+
+  <insert id="insertOrderCoffee">
+    INSERT INTO `order_coffee` (order_no, coffee_name, coffee_id, quantity)
+    VALUES (#{orderId}, #{coffeeName}, #{coffeeId}, #{quantity})
+  </insert>
+
+</mapper>
