@@ -26,7 +26,7 @@ public class ProductService {
     public void registProduct(MultipartFile pd_IMG, Product dto) {
         try {
 
-            FileDto savedFile = fileUtil.upload(pd_IMG, "upload");
+            FileDto savedFile = fileUtil.upload(pd_IMG, "product");
 
             dto.setImg(savedFile.savePath()+savedFile.renameFileName());
 
