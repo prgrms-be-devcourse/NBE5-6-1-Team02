@@ -96,4 +96,19 @@ public class CoffeeController {
         return "fail";
     }
 
+    @GetMapping("/member/order")
+    public String memberOrder(Model model, HttpSession session) {
+        // 회원인지 확인 (실제 로그인 기능 구현 시 이 부분은 인터셉터나 필터로 대체 가능)
+        // 지금은 더미 데이터 사용
+
+        // 상품 목록 가져오기 (기존 로직과 동일)
+        List<Coffee> coffeeList = coffeeService.getAllCoffees();
+        model.addAttribute("products", coffeeList);
+
+        // 회원 이메일을 모델에 추가 (실제 로그인 기능 구현 시 세션에서 가져옴)
+        model.addAttribute("memberEmail", "aaa@naver.com");
+
+        return "coffee/member-order";
+    }
+
 }
