@@ -10,6 +10,7 @@
 <%@include file="/WEB-INF/view/include/sidenav.jsp" %>
 <main class="container">
 <h4>ADMIN DASHBOARD</h4>
+
 </main>
 <%@include file="/WEB-INF/view/include/footer.jsp" %>
 

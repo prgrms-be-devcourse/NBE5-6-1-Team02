@@ -1,10 +1,7 @@
 package coffeemanager.app.model.product.dto;
 
-import coffeemanager.app.controller.web.admin.form.ProductForm;
-import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor

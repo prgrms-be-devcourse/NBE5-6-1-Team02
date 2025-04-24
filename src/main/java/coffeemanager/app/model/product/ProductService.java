@@ -27,7 +27,7 @@ public class ProductService {
 
             FileDto savedFile = fileUtil.upload(pd_IMG, "upload");
 
-            dto.setImg(savedFile.savePath());
+            dto.setImg(savedFile.savePath()+savedFile.renameFileName());
 
             productRepository.insert(dto);
 

@@ -1,6 +1,6 @@
 package coffeemanager.app.model.member;
 
-import coffeemanager.app.controller.web.member.form.UpdateForm;
+import coffeemanager.app.controller.member.form.UpdateForm;
 import coffeemanager.app.model.member.dto.Member;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Insert;

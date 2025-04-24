@@ -1,7 +1,6 @@
-package coffeemanager.app.controller.web.admin;
+package coffeemanager.app.controller.admin;
 
-import coffeemanager.app.controller.web.admin.form.ProductForm;
-import coffeemanager.app.model.member.MemberService;
+import coffeemanager.app.controller.admin.form.ProductForm;
 import coffeemanager.app.model.product.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +22,9 @@ public class AdminController {
 
     private final ProductService productService;
     
-    @GetMapping("")
-    public String dashboard(){
+    @GetMapping()
+    public String dashboard() {
+
         return "admin/dashboard";
     }
 

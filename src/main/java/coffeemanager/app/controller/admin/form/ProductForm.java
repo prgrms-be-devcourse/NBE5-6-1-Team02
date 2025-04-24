@@ -1,4 +1,4 @@
-package coffeemanager.app.controller.web.admin.form;
+package coffeemanager.app.controller.admin.form;
 
 
 import coffeemanager.app.model.product.dto.Product;

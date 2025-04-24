@@ -1,6 +1,6 @@
 package coffeemanager.app.model.member;
 
-import coffeemanager.app.controller.web.member.form.UpdateForm;
+import coffeemanager.app.controller.member.form.UpdateForm;
 import coffeemanager.app.model.auth.code.Role;
 import coffeemanager.app.model.member.dto.Member;
 import coffeemanager.app.model.member.dto.Principal;

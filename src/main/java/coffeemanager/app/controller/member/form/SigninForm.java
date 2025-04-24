@@ -1,4 +1,4 @@
-package coffeemanager.app.controller.web.member.form;
+package coffeemanager.app.controller.member.form;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

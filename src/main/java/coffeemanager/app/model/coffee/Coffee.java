@@ -1,5 +1,5 @@
 package coffeemanager.app.model.coffee;
 
-public class CoffeeService {
+public class Coffee {
 
 }
