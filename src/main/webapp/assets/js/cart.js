@@ -10,6 +10,19 @@ function addToCart(coffeeId) {
   });
 }
 
+function removeFromCart(coffeeId) {
+  fetch(`/cart/remove?id=${coffeeId}`)
+  .then(res => res.text())
+  .then(result => {
+    if (result === 'success') {
+      loadCart();
+    } else {
+      alert('삭제에 실패했습니다.');
+    }
+  });
+}
+
+
 function loadCart() {
   fetch('/cart/data')
   .then(res => res.json())
@@ -27,15 +40,21 @@ function loadCart() {
       nameCol.textContent = item.name;
 
       const quantityCol = document.createElement('div');
-      quantityCol.className = 'col-4 text-end';
+      quantityCol.className = 'col-3';
+      quantityCol.textContent = item.quantity + '개';
 
-      const badge = document.createElement('span');
-      badge.className = 'badge bg-dark';
-      badge.textContent = item.quantity + '개';
+      const deleteCol = document.createElement('div');
+      deleteCol.className = 'col-3 text-end';
 
-      quantityCol.appendChild(badge);
+      const delBtn = document.createElement('button');
+      delBtn.className = 'btn btn-sm btn-outline-danger';
+      delBtn.textContent = '삭제';
+      delBtn.onclick = () => removeFromCart(item.coffeeId);
+      deleteCol.appendChild(delBtn);
+
       row.appendChild(nameCol);
       row.appendChild(quantityCol);
+      row.appendChild(deleteCol);
       cartArea.appendChild(row);
     });
 

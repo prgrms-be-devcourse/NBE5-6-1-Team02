@@ -53,10 +53,7 @@ public class FileUtil {
     private String createSavePath(String depth) {
         LocalDate now = LocalDate.now();
         String pathDepth = (depth == null || depth.isEmpty()) ? "" : depth + "/";
-        return pathDepth + "/" +
-            now.getYear() + "/" +
-            now.getMonth() + "/" +
-            now.getDayOfMonth() + "/";
+        return pathDepth;
     }
 
 }

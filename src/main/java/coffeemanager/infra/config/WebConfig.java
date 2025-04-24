@@ -8,8 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/upload/**") // URL 패턴
-            .addResourceLocations("file:////C:/Users/A/Desktop/firstProject/upload/"); // 실제 폴더
+        registry.addResourceHandler("/upload/**")
+            .addResourceLocations("file:///C:/Users/A/Desktop/firstProject/NBE5-6-1-Team02/upload/");
     }
 }
 
