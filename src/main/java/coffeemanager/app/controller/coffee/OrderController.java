@@ -33,6 +33,6 @@ public class OrderController {
 
         session.removeAttribute("cart"); // 장바구니 비움
         redirectAttributes.addFlashAttribute("message", "주문이 완료되었습니다!");
-        return "redirect:/coffee/order";
+        return "/coffee/order-result";
     }
 }
