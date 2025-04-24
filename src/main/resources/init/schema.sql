@@ -24,4 +24,12 @@ CREATE TABLE `MEMBER`
 --     `RENTABLE_DATE` timestamp NULL DEFAULT now() COMMENT '대출가능일자'
 -- );
 
+-- -- 커피 테이블
+-- CREATE TABLE `COFFEE` (
+--                           `COFFEE_ID` INT NOT NULL PRIMARY KEY comment '제품번호',
+--                           `COFFEE_NAME` VARCHAR(200) NOT NULL comment '제품명',
+--                           `PRICE` INT NOT NULL comment '가격',
+--                           `TYPE` VARCHAR(20) comment '제품유형'
+-- );
+
 

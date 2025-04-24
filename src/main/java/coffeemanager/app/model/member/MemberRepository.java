@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 @Mapper
@@ -19,5 +20,13 @@ public interface MemberRepository {
     @Insert("insert into member (USER_Email, PASSWORD, TEL, ADDRESS,ZIPCODE) "
                 + "values(#{email}, #{password},#{tel},#{address},#{zipcode})")
     void insert(Member dto);
+
+    @Update("UPDATE member SET USER_Email = #{email}, "
+        + "PASSWORD = #{password}, "
+        + "TEL = #{tel}, "
+        + "ADDRESS = #{address}, "
+        + "ZIPCODE = #{zipcode} "
+        + "WHERE USER_Email = #{email}")
+    void update(Member dto);
 
 }

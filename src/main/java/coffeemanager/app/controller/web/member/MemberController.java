@@ -4,12 +4,14 @@ package coffeemanager.app.controller.web.member;
 import coffeemanager.app.controller.web.member.form.SigninForm;
 import coffeemanager.app.controller.web.member.form.SignupForm;
 import coffeemanager.app.model.member.MemberService;
+import coffeemanager.app.model.member.dto.Member;
 import coffeemanager.app.model.member.dto.Principal;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,8 +39,12 @@ public class MemberController {
     @GetMapping("/guest-login")
     public String noUserLogin(){return "member/guest-login";}
 
-    @GetMapping("/mypage")
-    public String myPage(Model model){
+    @GetMapping("mypage")
+    public String mypage(Authentication authentication, Model model){
+        log.info("authentication : {}", authentication);
+        String email = authentication.getName();
+        Member member = memberService.findByEmail(email);
+        model.addAttribute("member", member);
         return "member/mypage";
     }
 
