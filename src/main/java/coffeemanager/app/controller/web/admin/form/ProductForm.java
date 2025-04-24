@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 public class ProductForm {
 
-    private List<MultipartFile> pd_Img;
+    private String pd_Img;
     @NotBlank
     private String name;
     @NotBlank
@@ -18,6 +18,7 @@ public class ProductForm {
 
     public Product toDto(){
         Product product = new Product();
+        product.setImg(pd_Img);
         product.setName(name);
         product.setPrice(price);
         return product;

@@ -9,7 +9,7 @@
 <%@include file="/WEB-INF/view/include/header.jsp" %>
 <%@include file="/WEB-INF/view/include/sidenav.jsp" %>
 <main class="container">
-    <form:form action="${context}/book/regist" method="post" enctype="multipart/form-data" modelAttribute="ProductForm">
+    <form:form action="/admin/regist" method="post" enctype="multipart/form-data" modelAttribute="ProductForm">
         <div class="file-field input-field">
             <div class="btn">
                 <span>File</span>
