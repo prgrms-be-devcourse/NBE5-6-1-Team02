@@ -59,13 +59,13 @@
             <ul class="list-group w-100">
                 <c:forEach items="${products}" var="product">
                     <li class="list-group-item d-flex mt-3">
-                        <div class="col-2"><img class="img-fluid" src="${product.imageUrl}" alt=""></div>
+                        <div class="col-2"><img class="img-fluid" src="${product.img}" alt=""></div>
                         <div class="col">
                             <div>${product.name}</div>
                         </div>
                         <div class="col text-center">${product.price}원</div>
                         <div class="col text-end">
-                            <a class="btn btn-small btn-outline-dark" href="#" onclick="addToCart('${product.id}')">추가</a>
+                            <a class="btn btn-small btn-outline-dark" href="#" onclick="addToCart('${product.cpIdx}')">추가</a>
                         </div>
                     </li>
                 </c:forEach>
@@ -75,7 +75,7 @@
         <div class="col-md-4 summary p-4">
             <div class="user-info">
                 <h6 class="mb-2">로그인 정보</h6>
-                <p class="mb-0"><strong>이메일:</strong> aaa@naver.com</p>
+                <p class="mb-0"><strong>이메일:</strong> ${userEmail}</p>
             </div>
 
             <h5><b>결제 정보</b></h5>
@@ -86,7 +86,8 @@
 
             <form action="${pageContext.request.contextPath}/order" method="post">
                 <!-- 히든 필드로 이메일 전송 -->
-                <input type="hidden" name="email" value="aaa@naver.com">
+                <input type="hidden" name="email" value="${userEmail}">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
                 <div class="mb-3">
                     <label class="form-label">주소</label>

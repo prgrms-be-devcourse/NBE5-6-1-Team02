@@ -2,10 +2,15 @@ package coffeemanager.app.controller.coffee;
 
 import coffeemanager.app.model.coffee.CartItem;
 import coffeemanager.app.model.coffee.Coffee;
+import coffeemanager.app.model.member.MemberService;
+import coffeemanager.app.model.member.dto.Member;
 import coffeemanager.app.service.CoffeeService;
 import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +26,7 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 public class CoffeeController {
-
+    private final MemberService memberService;
     private final CoffeeService coffeeService;
 
     @GetMapping("/coffee/order")
@@ -97,15 +102,22 @@ public class CoffeeController {
 
     @GetMapping("/coffee/member-order")
     public String memberOrder(Model model, HttpSession session) {
-        // 회원인지 확인 (실제 로그인 기능 구현 시 이 부분은 인터셉터나 필터로 대체 가능)
-        // 지금은 더미 데이터 사용
+        // 세션에서 로그인 정보 가져오기 (Spring Security를 사용하는 경우)
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email = "";
 
-        // 상품 목록 가져오기 (기존 로직과 동일)
+        if (principal instanceof UserDetails) {
+            email = ((UserDetails)principal).getUsername();
+        } else {
+            email = principal.toString();
+        }
+
+        // 상품 목록 가져오기
         List<Coffee> coffeeList = coffeeService.getAllCoffees();
         model.addAttribute("products", coffeeList);
 
-        // 회원 이메일을 모델에 추가 (실제 로그인 기능 구현 시 세션에서 가져옴)
-        model.addAttribute("memberEmail", "aaa@naver.com");
+        // 사용자 이메일 추가
+        model.addAttribute("userEmail", email);
 
         return "coffee/member-order";
     }
