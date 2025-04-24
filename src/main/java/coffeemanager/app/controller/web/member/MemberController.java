@@ -3,6 +3,7 @@ package coffeemanager.app.controller.web.member;
 
 import coffeemanager.app.controller.web.member.form.SigninForm;
 import coffeemanager.app.controller.web.member.form.SignupForm;
+import coffeemanager.app.controller.web.member.form.UpdateForm;
 import coffeemanager.app.model.member.MemberService;
 import coffeemanager.app.model.member.dto.Member;
 import coffeemanager.app.model.member.dto.Principal;
@@ -39,20 +40,33 @@ public class MemberController {
     @GetMapping("/guest-login")
     public String noUserLogin(){return "member/guest-login";}
 
-    @GetMapping("mypage")
-    public String mypage(Authentication authentication, Model model){
-        log.info("authentication : {}", authentication);
-        String email = authentication.getName();
-        Member member = memberService.findByEmail(email);
-        model.addAttribute("member", member);
-        return "member/mypage";
-    }
-
     // 회원가입 페이지
     @GetMapping("/signup")
     public String signup(SignupForm form){
         return "member/signup";
     }
+
+    @GetMapping("/fixinfo")
+    public String fixinfo(Model model){
+        model.addAttribute("updateForm", new UpdateForm());
+        return "member/fixinfo";
+    }
+
+    @PostMapping("fixinfo")
+    public String fixInfo(
+        @Valid UpdateForm form,
+        BindingResult bindingResult,
+        Authentication authentication) {
+        if (bindingResult.hasErrors()) {
+            return "member/fixinfo";
+        }
+
+        form.setEmail(authentication.getName());
+        memberService.update(form);
+
+        return "redirect:/member/mypage";
+    }
+
 
     @PostMapping("signup")
     public String signup(
@@ -67,6 +81,15 @@ public class MemberController {
         memberService.signup(form.toDto());
 
         return "redirect:/";
+    }
+
+    @GetMapping("mypage")
+    public String mypage(Authentication authentication, Model model){
+        log.info("authentication : {}", authentication);
+        String email = authentication.getName();
+        Member member = memberService.findByEmail(email);
+        model.addAttribute("member", member);
+        return "member/mypage";
     }
 }
 

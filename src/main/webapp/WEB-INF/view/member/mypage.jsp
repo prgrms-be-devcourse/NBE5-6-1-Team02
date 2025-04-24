@@ -12,6 +12,8 @@
 <main class="container">
     <h4><c:out value="${member.email}"/></h4>
     <h4><c:out value="${member.tel}"/></h4>
+    <h4><c:out value="${member.address}"/></h4>
+    <h4><c:out value="${member.zipcode}"/></h4>
 </main>
 
 <%@include file="/WEB-INF/view/include/footer.jsp" %>

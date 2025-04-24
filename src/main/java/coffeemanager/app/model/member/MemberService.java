@@ -1,5 +1,6 @@
 package coffeemanager.app.model.member;
 
+import coffeemanager.app.controller.web.member.form.UpdateForm;
 import coffeemanager.app.model.auth.code.Role;
 import coffeemanager.app.model.member.dto.Member;
 import coffeemanager.app.model.member.dto.Principal;
@@ -50,4 +51,12 @@ public class MemberService{
         return memberRepository.selectByEmail(email)
                             .orElseThrow(() -> new CommonException(ResponseCode.BAD_REQUEST));
     }
+
+    public void update(UpdateForm dto) {
+        String encodedPassword = passwordEncoder.encode(dto.getPassword());
+        dto.setPassword(encodedPassword);
+
+        memberRepository.update(dto);
+    }
+
 }
