@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="coffeemanager.app.repository.CoffeeRepository">
+  <select id="findAllCoffees" resultType="coffeemanager.app.model.coffee.Coffee">
+    SELECT
+      COFFEE_ID as cpIdx,
+      COFFEE_NAME as name,
+      PRICE as price
+    FROM COFFEE
+  </select>
+
+  <select id="findCoffeeById" parameterType="int" resultType="coffeemanager.app.model.coffee.Coffee">
+    SELECT
+      COFFEE_ID as cpIdx,
+      COFFEE_NAME as name,
+      PRICE as price
+    FROM COFFEE
+    WHERE COFFEE_ID = #{coffeeId}
+  </select>
+</mapper>

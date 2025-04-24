@@ -1,8 +1,8 @@
 package coffeemanager.app.model.member;
 
+import coffeemanager.app.controller.member.form.UpdateForm;
 import coffeemanager.app.model.auth.code.Role;
 import coffeemanager.app.model.member.dto.Member;
-import coffeemanager.app.model.member.dto.MemberInfo;
 import coffeemanager.app.model.member.dto.Principal;
 import coffeemanager.infra.error.exceptions.CommonException;
 import coffeemanager.infra.response.ResponseCode;
@@ -24,42 +24,39 @@ public class MemberService{
     private final MemberRepository memberRepository;
     
     @Transactional
-    public void signup(Member dto, Role role) {
-        if(memberRepository.existsMember(dto.getUserId()))
+    public void signup(Member dto) {
+        if(memberRepository.existsMember(dto.getEmail()))
             throw new CommonException(ResponseCode.BAD_REQUEST);
         
         String encodedPassword = passwordEncoder.encode(dto.getPassword());
         dto.setPassword(encodedPassword);
-        
-        dto.setRole(role);
+
         memberRepository.insert(dto);
-        
-        MemberInfo memberInfo = new MemberInfo();
-        memberInfo.setUserId(dto.getUserId());
-        memberRepository.insertInfo(memberInfo);
     }
     
-    public Principal signin(String userId, String password) {
+    public Principal signin(String email, String password) {
         
-        Optional<Member> optional = memberRepository.selectById(userId);
-        
-        if(optional.isEmpty())
-            return Principal.ANONYMOUS;
-        
+        Optional<Member> optional = memberRepository.selectByEmail(email);
+
         Member member = optional.get();
-        
-        if(!member.getPassword().equals(password))
-            return Principal.ANONYMOUS;
-        
-        return new Principal(userId, List.of(Role.ROLE_USER), LocalDateTime.now());
+
+        return new Principal(email, List.of(Role.ROLE_USER), LocalDateTime.now());
     }
     
-    public Boolean isDuplicatedId(String id) {
-        return memberRepository.existsMember(id);
+    public Boolean isDuplicatedId(String email) {
+        return memberRepository.existsMember(email);
     }
     
-    public Member findById(String userId) {
-        return memberRepository.selectById(userId)
+    public Member findByEmail(String email) {
+        return memberRepository.selectByEmail(email)
                             .orElseThrow(() -> new CommonException(ResponseCode.BAD_REQUEST));
     }
+
+    public void update(UpdateForm dto) {
+        String encodedPassword = passwordEncoder.encode(dto.getPassword());
+        dto.setPassword(encodedPassword);
+
+        memberRepository.update(dto);
+    }
+
 }

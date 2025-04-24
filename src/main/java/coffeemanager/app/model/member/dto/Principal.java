@@ -7,13 +7,9 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("MEMBER_PRINCIPAL")
 public record Principal(
-    String userId,
+    String email,
     List<Role> Roles,
     LocalDateTime loginedAt
-) {
-    
-    public static final Principal ANONYMOUS = new Principal(
-        "anonymous",
-        List.of(Role.ANONYMOUS),
-        LocalDateTime.now());
+){
+
 }

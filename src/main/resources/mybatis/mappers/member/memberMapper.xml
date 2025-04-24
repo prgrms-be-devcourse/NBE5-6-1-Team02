@@ -5,17 +5,11 @@
 <mapper namespace="coffeemanager.app.model.member.MemberRepository">
 
   <resultMap id="memberMap" type="Member">
-    <id property="userId" column="user_id"/>
-    <association property="info" javaType="MemberInfo"
-                 column="user_id" select="selectInfoById"/>
+    <id property="email" column="USER_Email"/>
   </resultMap>
 
-  <select id="selectById" resultMap="memberMap">
-    select * from member where user_id = #{userId} and activated
-  </select>
-
-  <select id="selectInfoById" resultType="MemberInfo">
-    select * from member_info where user_id = #{userId}
+  <select id="selectByEmail" resultMap="memberMap">
+    select * from member where USER_Email = #{email} and activated
   </select>
 
 

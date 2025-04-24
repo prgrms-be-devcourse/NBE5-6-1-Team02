@@ -3,8 +3,7 @@ package coffeemanager.app.model.auth;
 import coffeemanager.app.model.auth.domain.Principal;
 import coffeemanager.app.model.member.MemberRepository;
 import coffeemanager.app.model.member.dto.Member;
-import coffeemanager.app.model.team.TeamRepository;
-import coffeemanager.app.model.team.dto.TeamMember;
+
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -21,29 +20,25 @@ import org.springframework.stereotype.Service;
 public class AuthService implements UserDetailsService {
     
     private final MemberRepository memberRepository;
-    private final TeamRepository teamRepository;
-    
-    
+
     @Override
     public UserDetails loadUserByUsername(String username){
-        
-        Member member = memberRepository.selectById(username)
+
+        Member member = memberRepository.selectByEmail(username)
                             .orElseThrow(() -> new UsernameNotFoundException(username));
         
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(member.getRole().name()));
-        
-        List<TeamMember> teamMembers = teamRepository.selectMembersByUserId(username);
-        
+
+        log.info("member.getEmail(): {}", member.getEmail());
+        log.info("member.getPassword(): {}", member.getPassword());
+        log.info("authorities: {}", authorities);
+
         // 스프링시큐리티는 기본적으로 권한 앞에 ROLE_ 이 있음을 가정
         // hasRole("ADMIN") =>  ROLE_ADMIN 권한이 있는 지 확인.
         // TEAM_{teamId}:{role}
         // hasAuthority("ADMIN") => ADMIN 권한을 확인
-        List<SimpleGrantedAuthority> teamAuthorities =
-            teamMembers.stream().map(e -> new SimpleGrantedAuthority("TEAM_" + e.getTeamId() + ":" + e.getRole()))
-                .toList();
-        
-        authorities.addAll(teamAuthorities);
+
         return Principal.createPrincipal(member, authorities);
     }
     
