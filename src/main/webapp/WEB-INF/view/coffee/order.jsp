@@ -51,7 +51,7 @@
                         </div>
                         <div class="col text-center">${product.price}원</div>
                         <div class="col text-end">
-                            <a class="btn btn-small btn-outline-dark" href="${pageContext.request.contextPath}/cart/add?id=${product.id}">추가</a>
+                            <a class="btn btn-small btn-outline-dark" href="#" onclick="addToCart('${product.id}')">추가</a>
                         </div>
                     </li>
                 </c:forEach>
@@ -61,11 +61,9 @@
         <div class="col-md-4 summary p-4">
             <h5><b>결제 정보</b></h5>
             <hr>
-            <c:forEach items="${cartItems}" var="item">
-                <div class="row">
-                    <h6>${item.name} <span class="badge bg-dark">${item.quantity}개</span></h6>
-                </div>
-            </c:forEach>
+            <div id="cart-area">
+                <!-- JS에서 장바구니 내용을 여기에 렌더링 -->
+            </div>
 
             <form action="${pageContext.request.contextPath}/order" method="post">
                 <div class="mb-3">
@@ -82,14 +80,75 @@
                 </div>
                 <div>당일 오후 2시 이후의 주문은 다음날 배송을 시작합니다.</div>
 
-                <div class="row pt-2 pb-2 border-top">
-                    <h5 class="col">총금액</h5>
-                    <h5 class="col text-end">${totalPrice}원</h5>
-                </div>
+
                 <button type="submit" class="btn btn-dark col-12">결제하기</button>
             </form>
         </div>
     </div>
 </div>
 </body>
+<script>
+  function addToCart(coffeeId) {
+    fetch('/cart/add?id=' + coffeeId)
+    .then(res => res.text())
+    .then(result => {
+      if (result === 'success') {
+        loadCart(); // 장바구니 다시 불러오기
+      } else {
+        alert("상품을 추가할 수 없습니다.");
+      }
+    });
+  }
+
+  function loadCart() {
+    fetch('/cart/data')
+    .then(res => res.json())
+    .then(data => {
+      const cartArea = document.getElementById('cart-area');
+      cartArea.innerHTML = '';
+
+      // 장바구니 항목 출력
+      data.cartItems.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'row mb-2';
+
+        const nameCol = document.createElement('div');
+        nameCol.className = 'col-8';
+        nameCol.textContent = item.name;
+
+        const quantityCol = document.createElement('div');
+        quantityCol.className = 'col-4 text-end';
+
+        const badge = document.createElement('span');
+        badge.className = 'badge bg-dark';
+        badge.textContent = item.quantity + '개';
+
+        quantityCol.appendChild(badge);
+        row.appendChild(nameCol);
+        row.appendChild(quantityCol);
+        cartArea.appendChild(row);
+      });
+
+
+      // 총금액 출력
+      const totalRow = document.createElement('div');
+      totalRow.className = 'row pt-2 pb-2 border-top';
+
+      const labelCol = document.createElement('div');
+      labelCol.className = 'col';
+      labelCol.innerHTML = `<h5>총금액</h5>`;
+
+      const priceCol = document.createElement('div');
+      priceCol.className = 'col text-end';
+      priceCol.textContent = data.totalPrice + '원';
+
+      totalRow.appendChild(labelCol);
+      totalRow.appendChild(priceCol);
+      cartArea.appendChild(totalRow);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", loadCart);
+</script>
+
 </html>
