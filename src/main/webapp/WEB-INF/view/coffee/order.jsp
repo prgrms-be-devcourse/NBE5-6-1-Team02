@@ -44,8 +44,9 @@
             <h5><b>상품 목록</b></h5>
             <ul class="list-group w-100">
                 <c:forEach items="${products}" var="product">
+                    <div>이미지 경로: ${product.img}</div>
                     <div class="col-2">
-                        <img class="img-fluid" src="${product.img}">
+                        <img class="img-fluid" src="${pageContext.request.contextPath}/upload/${product.img}">
                     </div>
                         <div class="col">
                             <div>${product.name}</div>
