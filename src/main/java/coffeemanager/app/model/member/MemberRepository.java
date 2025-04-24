@@ -21,12 +21,4 @@ public interface MemberRepository {
                 + "values(#{email}, #{password},#{tel},#{address},#{zipcode})")
     void insert(Member dto);
 
-    @Update("UPDATE member SET USER_Email = #{email}, "
-        + "PASSWORD = #{password}, "
-        + "TEL = #{tel}, "
-        + "ADDRESS = #{address}, "
-        + "ZIPCODE = #{zipcode} "
-        + "WHERE USER_Email = #{email}")
-    void update(Member dto);
-
 }
