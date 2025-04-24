@@ -1,8 +1,8 @@
 package coffeemanager.infra.util;
 
 public record FileDto(
-    String originFilename,
-    String renameFilename,
+    String originFileName,
+    String renameFileName,
     String savePath
 ) {
 

@@ -2,10 +2,11 @@ package coffeemanager.app.model.product;
 
 import coffeemanager.app.model.product.dto.Product;
 import coffeemanager.infra.response.ResponseCode;
-import coffeemanager.util.file.FileDto;
-import coffeemanager.util.file.FileUtil;
+
+import coffeemanager.infra.util.FileDto;
+import coffeemanager.infra.util.FileUtil;
 import java.io.IOException;
-import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

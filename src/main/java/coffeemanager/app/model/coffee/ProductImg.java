@@ -15,8 +15,8 @@ public class ProductImg {
 
     public ProductImg(Integer id, FileDto fileDto) {
         this.id = id;
-        this.originFileName = fileDto.originFilename();
-        this.renameFileName = fileDto.renameFilename();
+        this.originFileName = fileDto.originFileName();
+        this.renameFileName = fileDto.renameFileName();
         this.savePath = fileDto.savePath();
     }
 
