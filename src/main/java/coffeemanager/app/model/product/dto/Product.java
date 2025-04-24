@@ -4,12 +4,13 @@ import coffeemanager.app.controller.web.admin.form.ProductForm;
 import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
 public class Product {
 
-    private int cpIdx;
+    private Integer cpIdx;
     private String Img;
     private String name;
     private int price;

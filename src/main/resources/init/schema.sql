@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `MEMBER`;
 
 -- 커피 테이블
 CREATE TABLE `COFFEE` (
-                          `COFFEE_ID` INT NOT NULL PRIMARY KEY COMMENT '제품번호',
+                          `COFFEE_ID` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '제품번호',
                           `COFFEE_IMG` VARCHAR(255) COMMENT '제품 이미지 경로',
                           `COFFEE_NAME` VARCHAR(200) NOT NULL COMMENT '제품명',
                           `PRICE` INT NOT NULL COMMENT '가격'
