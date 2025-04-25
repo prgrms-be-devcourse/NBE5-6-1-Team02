@@ -6,6 +6,7 @@ import coffeemanager.app.controller.member.form.SignupForm;
 import coffeemanager.app.controller.member.form.UpdateForm;
 import coffeemanager.app.model.member.MemberService;
 import coffeemanager.app.model.member.dto.Member;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -86,6 +88,14 @@ public class MemberController {
         Member member = memberService.findByEmail(email);
         model.addAttribute("member", member);
         return "member/mypage";
+    }
+    @PostMapping("/guest-order")
+    public String processGuest(@RequestParam("email") String email, HttpSession session) {
+        // 비회원 이메일을 세션에 저장
+        session.setAttribute("guestEmail", email);
+
+        // 일반 주문 페이지로 리다이렉트
+        return "redirect:/coffee/order";
     }
 }
 

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>쇼핑몰 - 로그인</title>
+  <title>쇼핑몰 - 비회원 주문</title>
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -51,7 +51,7 @@
     }
 
     input[type="text"],
-    input[type="password"] {
+    input[type="email"] {
       width: 100%;
       padding: 10px;
       border: 1px solid #ddd;
@@ -62,7 +62,7 @@
     }
 
     input[type="text"]:focus,
-    input[type="password"]:focus {
+    input[type="email"]:focus {
       border-color: #3498db;
       outline: none;
     }
@@ -107,16 +107,19 @@
 <body>
 <div class="login-container">
   <div class="header-decoration"></div>
-  <h2>게스트 로그인</h2>
-  <form action="SigninForm" method="post">
+  <h2>비회원 주문</h2>
+  <form action="${pageContext.request.contextPath}/member/guest-order" method="post">
     <div class="form-group">
-      <label for="user-email">이메일</label>
-      <input type="text" id="user-email" name="user-email" placeholder="이메일을 입력하세요" required>
+      <label for="email">이메일</label>
+      <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
     </div>
+    <div>
     <button type="submit" class="login-btn">주문하러가기</button>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    </div>
   </form>
   <div class="extra-links">
-    <a href="/member/signup">회원가입</a>
+    <a href="/member/signup">회원가입</a> | <a href="/member/member-login">회원 로그인</a>
   </div>
 </div>
 </body>
