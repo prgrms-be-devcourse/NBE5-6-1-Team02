@@ -5,6 +5,7 @@ import coffeemanager.app.model.coffee.Order;
 import coffeemanager.app.model.coffee.OrderForm;
 import coffeemanager.app.repository.OrderRepository;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +18,8 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    public void processOrder(OrderForm form, Map<Long, CartItem> cart) {
-        int totalPrice = cart.values().stream()
+    public void processOrder(OrderForm form, List<CartItem> cartItems) {
+        int totalPrice = cartItems.stream()
             .mapToInt(item -> item.getPrice() * item.getQuantity())
             .sum();
 
@@ -33,7 +34,7 @@ public class OrderService {
         orderRepository.insertOrder(order); // useGeneratedKeys=true 로 ID 생성됨
 
         // 2. 주문 커피 정보 저장
-        for (CartItem item : cart.values()) {
+        for (CartItem item : cartItems) {
             orderRepository.insertOrderCoffee(order.getId(), item.getCoffeeId(),
                 item.getName(), item.getQuantity());
         }
