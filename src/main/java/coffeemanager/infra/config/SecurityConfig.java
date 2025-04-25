@@ -97,7 +97,7 @@ public class SecurityConfig {
             .logout(logout ->logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
-                .deleteCookies("remember-me","JSESSIONID")
+                .deleteCookies("remember-me")
                 .permitAll()
             );
         
