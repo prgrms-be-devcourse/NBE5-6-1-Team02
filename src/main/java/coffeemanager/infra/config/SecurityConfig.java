@@ -71,20 +71,16 @@ public class SecurityConfig {
             .authorizeHttpRequests(
                 (requests) -> requests
                     .requestMatchers(GET, "/", "/assets/**", "/download/**").permitAll()
-                    .requestMatchers(GET, "/book/list").permitAll()
-                    .requestMatchers(GET, "/api/book/list").permitAll()
-                    .requestMatchers(GET, "/api/member/exists/*").permitAll()
                     .requestMatchers(GET, "/member/signup").permitAll()
-                    .requestMatchers(GET, "/admin/**").permitAll()
+                    .requestMatchers(GET, "/admin/**").hasAnyRole("ADMIN")
                     .requestMatchers(GET, "/member/guest-login").permitAll()
                     .requestMatchers(GET, "/coffee/order").permitAll()
-                    .requestMatchers(GET, "/cart/add").permitAll()
-                    .requestMatchers(GET, "/cart/data").permitAll()
-                    .requestMatchers(GET, "/cart/remove").permitAll()
+                    .requestMatchers(GET, "/order").permitAll() //todo !!!수정필요!!!
                     .requestMatchers(GET, "/member/member-login").permitAll()
                     .requestMatchers(POST, "/member/guest-order").permitAll()
-                    .requestMatchers(POST,  "/order").permitAll()
-                    .requestMatchers(POST, "/member/member-login", "/member/signup").permitAll()
+                    .requestMatchers(POST, "/admin/**").hasRole("ADMIN")
+                    .requestMatchers(POST, "/member/signup").permitAll()
+                    .requestMatchers(POST, "/member/member-login").hasAnyRole("USER","ADMIN")
                     .anyRequest().authenticated()
             )
             .formLogin((form) -> form
@@ -98,7 +94,12 @@ public class SecurityConfig {
             .rememberMe(rememberMe -> rememberMe.key(rememberMeKey)
                 .tokenValiditySeconds(60*60*24*7)
                 .userDetailsService(authService))
-            .logout(LogoutConfigurer::permitAll);
+            .logout(logout ->logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .deleteCookies("remember-me","JSESSIONID")
+                .permitAll()
+            );
         
         return http.build();
     }

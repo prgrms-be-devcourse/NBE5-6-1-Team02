@@ -14,40 +14,33 @@
                         </a>
                     </li>
                 </sec:authorize>
-                <sec:authorize access="isAuthenticated()">
+                <sec:authorize access="hasRole('USER')">
                     <li><a href="/member/fixinfo" class="grey-text">fixinfo</a></li>
 
                     <li><a href="/coffee/member-order" class="grey-text">order</a></li>
 
+                </sec:authorize>
+                <sec:authorize access="hasRole('ADMIN')">
                     <li><a href="/admin/product-list" class="grey-text">List</a></li>
                     <li><a href="/admin/coffee/product-regist" class="grey-text">Regist</a></li>
+                </sec:authorize>
 
-                    <li><a href="#" id="logout" class="grey-text">logout</a></li>
+                <sec:authorize access="isAuthenticated()">
                     <li>
-                        <a href="mobile.html">
-                            <i class="material-icons grey-text sidenav-trigger"
-                               data-target="slide-out">more_vert</i>
-                        </a>
+                        <form:form action="/logout" method="POST" style="display:inline;">
+                            <button type="submit" class="grey-text" style="background:none; border:none; color: inherit; font-size: inherit; cursor: pointer;">logout</button>
+                        </form:form>
                     </li>
                 </sec:authorize>
+                <li>
+                    <a href="mobile.html">
+                        <i class="material-icons grey-text sidenav-trigger"
+                           data-target="slide-out">more_vert</i>
+                    </a>
+                </li>
 
             </ul>
         </div>
     </nav>
 </header>
-<form:form action="/logout" method="post" id="logoutForm">
-</form:form>
-<script>
 
-  (() => {
-
-    const logout = document.querySelector('#logout');
-    if(!logout) return;
-
-    logout.addEventListener('click', ev => {
-      ev.preventDefault();
-      logoutForm.submit();
-    });
-
-  })();
-</script>
