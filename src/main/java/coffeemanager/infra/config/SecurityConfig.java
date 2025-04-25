@@ -23,6 +23,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
@@ -63,6 +64,18 @@ public class SecurityConfig {
         };
 
     }
+    @Bean
+    public AuthenticationFailureHandler failureHandler() {
+        return (request, response, exception) -> {
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().write("""
+            <script>
+                alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+                window.location.href='/member/member-login';
+            </script>
+        """);
+        };
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthService authService) throws Exception {
@@ -89,6 +102,7 @@ public class SecurityConfig {
                 .loginProcessingUrl("/member/member-login")
                 .defaultSuccessUrl("/")
                 .successHandler(successHandler())
+                .failureHandler(failureHandler())
                 .permitAll()
             )
             .rememberMe(rememberMe -> rememberMe.key(rememberMeKey)
@@ -99,6 +113,7 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/")
                 .deleteCookies("remember-me","JSESSIONID")
                 .permitAll()
+
             );
         
         return http.build();
