@@ -3,12 +3,14 @@ package coffeemanager.infra.config;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
+import coffeemanager.app.model.auth.AuthService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,6 +19,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -25,6 +28,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
+@ComponentScan(basePackages = "coffeemanager")
 public class SecurityConfig {
 
     @Value("${remember-me.key}")
@@ -61,7 +65,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthService authService) throws Exception {
 
         http
             .authorizeHttpRequests(
@@ -88,7 +92,9 @@ public class SecurityConfig {
                 .successHandler(successHandler())
                 .permitAll()
             )
-            .rememberMe(rememberMe -> rememberMe.key(rememberMeKey))
+            .rememberMe(rememberMe -> rememberMe.key(rememberMeKey)
+                .tokenValiditySeconds(60*60*24*7)
+                .userDetailsService(authService))
             .logout(LogoutConfigurer::permitAll);
         
         return http.build();
