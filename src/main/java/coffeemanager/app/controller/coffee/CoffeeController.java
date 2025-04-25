@@ -2,13 +2,10 @@ package coffeemanager.app.controller.coffee;
 
 import coffeemanager.app.model.coffee.CartItem;
 import coffeemanager.app.model.coffee.Coffee;
-import coffeemanager.app.model.member.MemberService;
-import coffeemanager.app.model.member.dto.Member;
 import coffeemanager.app.service.CoffeeService;
 import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -26,7 +23,6 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 public class CoffeeController {
-    private final MemberService memberService;
     private final CoffeeService coffeeService;
 
     @GetMapping("/coffee/order")
@@ -109,7 +105,6 @@ public class CoffeeController {
 
     @GetMapping("/coffee/member-order")
     public String memberOrder(Model model, HttpSession session) {
-        // 세션에서 로그인 정보 가져오기 (Spring Security를 사용하는 경우)
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String email = "";
 
