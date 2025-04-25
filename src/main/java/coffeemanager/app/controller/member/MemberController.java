@@ -89,6 +89,7 @@ public class MemberController {
         model.addAttribute("member", member);
         return "member/mypage";
     }
+
     @PostMapping("/guest-order")
     public String processGuest(@RequestParam("email") String email, HttpSession session) {
         // 비회원 이메일을 세션에 저장
