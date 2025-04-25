@@ -20,7 +20,7 @@
                 <c:if test="${not empty coffee.img}">
                     <c:forEach items="${coffee.img}" var="image">
                         <c:if test="${not empty coffee.img}">
-                            <img src="${pageContext.request.contextPath}/download/${coffee.img}" alt="thumbnail" class="circle">
+                            <img src="${pageContext.request.contextPath}/upload/${coffee.img}" alt="thumbnail" class="circle">
                         </c:if>
                     </c:forEach>
                 </c:if>
