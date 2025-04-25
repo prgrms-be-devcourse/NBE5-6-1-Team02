@@ -31,8 +31,15 @@ public class CoffeeController {
 
     @GetMapping("/coffee/order")
     public String coffeeList(Model model, HttpSession session) {
+        // 상품 목록 가져오기
         List<Coffee> coffeeList = coffeeService.getAllCoffees();
         model.addAttribute("products", coffeeList);
+
+        // 세션에서 비회원 이메일 확인
+        String guestEmail = (String) session.getAttribute("guestEmail");
+        if (guestEmail != null && !guestEmail.isEmpty()) {
+            model.addAttribute("guestEmail", guestEmail);
+        }
 
         return "coffee/order";
     }
@@ -121,5 +128,6 @@ public class CoffeeController {
 
         return "coffee/member-order";
     }
+
 
 }

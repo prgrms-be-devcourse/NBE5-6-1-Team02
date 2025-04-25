@@ -50,7 +50,7 @@
 </head>
 <body class="container-fluid">
 <div class="row justify-content-center m-4">
-    <h1 class="text-center">회원 주문 <span class="member-badge">회원</span></h1>
+    <h1 class="text-center">회원 주문 </h1>
 </div>
 <div class="card">
     <div class="row">

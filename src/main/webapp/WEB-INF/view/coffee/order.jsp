@@ -31,12 +31,27 @@
           border-bottom-left-radius: 1rem;
         }
       }
+      .user-info {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+      }
+      .guest-badge {
+        display: inline-block;
+        background-color: #dc3545;
+        color: white;
+        padding: 0.35rem 0.65rem;
+        border-radius: 0.25rem;
+        margin-left: 0.5rem;
+        font-size: 0.8rem;
+      }
     </style>
     <title>상품 주문 페이지</title>
 </head>
 <body class="container-fluid">
 <div class="row justify-content-center m-4">
-    <h1 class="text-center">상품 목록 & 결제</h1>
+    <h1 class="text-center">비회원 주문</h1>
 </div>
 <div class="card">
     <div class="row">
@@ -44,9 +59,8 @@
             <h5><b>상품 목록</b></h5>
             <ul class="list-group w-100">
                 <c:forEach items="${products}" var="product">
-                    <div class="col-2">
-                        <img class="img-fluid" src="${product.img}">
-                    </div>
+                    <li class="list-group-item d-flex mt-3">
+                        <div class="col-2"><img class="img-fluid" src="${product.img}" alt=""></div>
                         <div class="col">
                             <div>${product.name}</div>
                         </div>
@@ -69,25 +83,102 @@
             <form action="${pageContext.request.contextPath}/order" method="post">
                 <div class="mb-3">
                     <label class="form-label">이메일</label>
-                    <input type="email" name="email" class="form-control">
+                    <c:choose>
+                        <c:when test="${not empty guestEmail}">
+                            <div class="user-info">
+                                    ${guestEmail} <span class="guest-badge">비회원</span>
+                                <input type="hidden" name="email" value="${guestEmail}">
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <input type="email" name="email" class="form-control" required>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">주소</label>
-                    <input type="text" name="address" class="form-control">
+                    <input type="text" name="address" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">우편번호</label>
-                    <input type="text" name="postcode" class="form-control">
+                    <input type="text" name="postcode" class="form-control" required>
                 </div>
                 <div>당일 오후 2시 이후의 주문은 다음날 배송을 시작합니다.</div>
 
+                <!-- CSRF 토큰 추가 -->
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-                <button type="submit" class="btn btn-dark col-12">결제하기</button>
+                <button type="submit" class="btn btn-dark col-12 mt-3">결제하기</button>
             </form>
         </div>
     </div>
 </div>
 </body>
 <script src="${pageContext.request.contextPath}/assets/js/cart.js"></script>
+<script>
+  // 장바구니에 상품 추가
+  function addToCart(coffeeId) {
+    fetch('/cart/add?id=' + coffeeId)
+    .then(res => res.text())
+    .then(result => {
+      if (result === 'success') {
+        loadCart(); // 장바구니 다시 불러오기
+      } else {
+        alert("상품을 추가할 수 없습니다.");
+      }
+    });
+  }
+
+  // 장바구니 데이터 불러오기
+  function loadCart() {
+    fetch('/cart/data')
+    .then(res => res.json())
+    .then(data => {
+      const cartArea = document.getElementById('cart-area');
+      cartArea.innerHTML = '';
+
+      // 장바구니 항목 출력
+      data.cartItems.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'row mb-2';
+
+        const nameCol = document.createElement('div');
+        nameCol.className = 'col-8';
+        nameCol.textContent = item.name;
+
+        const quantityCol = document.createElement('div');
+        quantityCol.className = 'col-4 text-end';
+
+        const badge = document.createElement('span');
+        badge.className = 'badge bg-dark';
+        badge.textContent = item.quantity + '개';
+
+        quantityCol.appendChild(badge);
+        row.appendChild(nameCol);
+        row.appendChild(quantityCol);
+        cartArea.appendChild(row);
+      });
+
+      // 총금액 출력
+      const totalRow = document.createElement('div');
+      totalRow.className = 'row pt-2 pb-2 border-top';
+
+      const labelCol = document.createElement('div');
+      labelCol.className = 'col';
+      labelCol.innerHTML = `<h5>총금액</h5>`;
+
+      const priceCol = document.createElement('div');
+      priceCol.className = 'col text-end';
+      priceCol.innerHTML = `<h5>${data.totalPrice}원</h5>`;
+
+      totalRow.appendChild(labelCol);
+      totalRow.appendChild(priceCol);
+      cartArea.appendChild(totalRow);
+    });
+  }
+
+  // 페이지 로드 시 장바구니 불러오기
+  document.addEventListener("DOMContentLoaded", loadCart);
+</script>
 
 </html>
