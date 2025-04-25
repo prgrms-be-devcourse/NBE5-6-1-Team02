@@ -47,7 +47,7 @@
         font-size: 0.8rem;
       }
     </style>
-    <title>상품 주문 페이지</title>
+    <title>주문 페이지</title>
 </head>
 <body class="container-fluid">
 <div class="row justify-content-center m-4">
@@ -59,8 +59,6 @@
             <h5><b>상품 목록</b></h5>
             <ul class="list-group w-100">
                 <c:forEach items="${products}" var="product">
-
-                    <div>이미지 경로: ${product.img}</div>
                     <div class="col-2">
                         <img class="img-fluid" src="${pageContext.request.contextPath}/upload/${product.img}">
                     </div>
@@ -69,7 +67,8 @@
                         </div>
                         <div class="col text-center">${product.price}원</div>
                         <div class="col text-end">
-                            <a class="btn btn-small btn-outline-dark" href="#" onclick="addToCart('${product.cpIdx}')">추가</a>
+                            <a href="#" class="btn btn-sm btn-outline-dark"
+                               onclick="addToCart('${product.cpIdx}', '${product.name}', ${product.price})">추가</a>
                         </div>
                     </li>
                 </c:forEach>
@@ -79,9 +78,7 @@
         <div class="col-md-4 summary p-4">
             <h5><b>결제 정보</b></h5>
             <hr>
-            <div id="cart-area">
-                <!-- JS에서 장바구니 내용을 여기에 렌더링 -->
-            </div>
+            <div id="cart-area"></div>
 
             <form action="${pageContext.request.contextPath}/order" method="post">
                 <div class="mb-3">
@@ -90,34 +87,33 @@
                         <c:when test="${not empty guestEmail}">
                             <div class="user-info">
                                     ${guestEmail} <span class="guest-badge">비회원</span>
-                                <input type="hidden" name="email" value="${guestEmail}">
+                                <input type="hidden" id="email" name="email" value="${guestEmail}">
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <input type="email" name="email" class="form-control" required>
+                            <input type="email" name="email" class="form-control" id="email" required>
                         </c:otherwise>
                     </c:choose>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">주소</label>
-                    <input type="text" name="address" class="form-control" required>
+                    <input type="text" name="address" class="form-control" id="address" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">우편번호</label>
-                    <input type="text" name="postcode" class="form-control" required>
+                    <input type="text" name="postcode" class="form-control" id="postcode" required>
                 </div>
                 <div>당일 오후 2시 이후의 주문은 다음날 배송을 시작합니다.</div>
 
-                <!-- CSRF 토큰 추가 -->
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                <button type="button" class="btn btn-dark col-12 mt-3" onclick="submitOrder()">결제하기</button>
 
-                <button type="submit" class="btn btn-dark col-12 mt-3">결제하기</button>
             </form>
         </div>
     </div>
 </div>
 </body>
+<script>
+  var csrfToken = '${_csrf.token}';
+</script>
 <script src="${pageContext.request.contextPath}/assets/js/cart.js"></script>
-
-
 </html>
