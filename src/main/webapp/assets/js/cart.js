@@ -20,58 +20,52 @@ function renderCart() {
   area.innerHTML = '';
 
   if (cart.length === 0) {
-    area.innerHTML = '<p>장바구니가 비어있습니다.</p>';
+    area.innerHTML = '<p class="cart-empty">장바구니가 비어있습니다.</p>';
     return;
   }
 
   cart.forEach(item => {
     const row = document.createElement('div');
-    row.className = 'row mb-2 align-items-center';
+    row.classList.add('cart-row');
 
-    // 상품 이름
-    const nameCol = document.createElement('div');
-    nameCol.className = 'col-7';
-    nameCol.textContent = item.name;
+    const info = document.createElement('div');
+    info.classList.add('cart-info');
 
-    // 수량
-    const qtyCol = document.createElement('div');
-    qtyCol.className = 'col-2';
-    qtyCol.textContent = item.quantity + '개';
+    const name = document.createElement('div');
+    name.classList.add('name');
+    name.textContent = item.name;
 
-    // 삭제 버튼
-    const btnCol = document.createElement('div');
-    btnCol.className = 'col-3 text-end';
+    const quantity = document.createElement('div');
+    quantity.classList.add('quantity');
+    quantity.textContent = `${item.quantity}개`;
+
+    info.appendChild(name);
+    info.appendChild(quantity);
 
     const delBtn = document.createElement('button');
-    delBtn.className = 'btn btn-sm btn-outline-danger';
+    delBtn.classList.add('cart-btn');
     delBtn.textContent = '삭제';
     delBtn.onclick = () => removeFromCart(item.coffeeId);
 
-    btnCol.appendChild(delBtn);
-
-    row.appendChild(nameCol);
-    row.appendChild(qtyCol);
-    row.appendChild(btnCol);
+    row.appendChild(info);
+    row.appendChild(delBtn);
 
     area.appendChild(row);
   });
 
-  // 총 금액 출력
-  const total = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const totalRow = document.createElement('div');
-  totalRow.className = 'row border-top pt-2';
+  totalRow.classList.add('cart-total');
 
-  const totalLabelCol = document.createElement('div');
-  totalLabelCol.className = 'col';
-  totalLabelCol.innerHTML = '<b>총 금액</b>';
+  const totalLabel = document.createElement('div');
+  totalLabel.textContent = '총 금액';
 
-  const totalPriceCol = document.createElement('div');
-  totalPriceCol.className = 'col text-end';
-  totalPriceCol.textContent = total + '원';
+  const totalPrice = document.createElement('div');
+  totalPrice.textContent = total + '원';
 
-  totalRow.appendChild(totalLabelCol);
-  totalRow.appendChild(totalPriceCol);
+  totalRow.appendChild(totalLabel);
+  totalRow.appendChild(totalPrice);
   area.appendChild(totalRow);
 }
 
