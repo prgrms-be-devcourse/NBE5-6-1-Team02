@@ -7,6 +7,7 @@
     SELECT
       COFFEE_IMG as img,
       COFFEE_ID as cpIdx,
+      COFFEE_IMG as img,
       COFFEE_NAME as name,
       PRICE as price
     FROM COFFEE

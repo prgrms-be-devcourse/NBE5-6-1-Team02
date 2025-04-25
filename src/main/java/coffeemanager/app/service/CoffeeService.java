@@ -24,4 +24,8 @@ public class CoffeeService {
     public Coffee getCoffeeById(int coffeeId) {
         return coffeeRepository.findCoffeeById(coffeeId);
     }
+
+    public void deleteCoffeeName(String coffeeName) {
+        coffeeRepository.deleteCoffeeByName(coffeeName);
+    }
 }

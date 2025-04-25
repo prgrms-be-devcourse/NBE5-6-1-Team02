@@ -16,6 +16,7 @@
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <li><a href="/member/fixinfo" class="grey-text">fixinfo</a></li>
+                    <li><a href="/admin/product-list" class="grey-text">List</a></li>
                     <li><a href="/admin/coffee/product-regist" class="grey-text">Regist</a></li>
                     <li><a href="#" id="logout" class="grey-text">logout</a></li>
                     <li>

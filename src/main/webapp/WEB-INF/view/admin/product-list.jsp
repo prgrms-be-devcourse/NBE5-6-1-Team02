@@ -11,21 +11,35 @@
 <main class="container">
     <h4>Product List</h4>
     <ul class="collection book-list">
-        <c:forEach items="${books}" var="book">
+        <c:forEach items="${coffees}" var="coffee">
             <li class="collection-item avatar">
-                <c:if test="${empty book.images}">
+                <c:if test="${empty coffee.img}">
                     <img src="#" alt="thumbnail" class="circle">
                 </c:if>
 
-                <c:if test="${not empty book.images}">
-                    <c:forEach items="${book.images}" var="image">
-                        <c:if test="${image.type.name() == 'THUMBNAIL'}">
-                            <img src="${image.url}" alt="thumbnail" class="circle">
+                <c:if test="${not empty coffee.img}">
+                    <c:forEach items="${coffee.img}" var="image">
+                        <c:if test="${not empty coffee.img}">
+                            <img src="${pageContext.request.contextPath}/download/${coffee.img}" alt="thumbnail" class="circle">
                         </c:if>
                     </c:forEach>
                 </c:if>
-                <span class="title"><c:out value="${book.title}"/></span>
-                <p><c:out value="${book.author}"/></p>
+                <span class="title"><c:out value="상품명 : ${coffee.name}"/></span>
+                <!-- 상품 가격 옆에 삭제 버튼 추가 -->
+                <p>
+                        <c:out value="가격 : ${coffee.price}"/>
+
+                    <!-- 삭제 버튼 -->
+                <form action="${pageContext.request.contextPath}/admin/product/delete" method="post" style="display:inline;">
+                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+
+                <input type="hidden" name="coffeeName" value="${coffee.name}" />
+                    <button type="submit" class="btn-flat red-text" onclick="return confirm('정말 삭제하시겠습니까?');">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </form>
+                </p>
+
                 <a href="#" class="secondary-content"><i class="material-icons">grade</i></a>
             </li>
         </c:forEach>
