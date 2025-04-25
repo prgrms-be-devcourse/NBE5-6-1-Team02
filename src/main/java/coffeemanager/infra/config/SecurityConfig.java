@@ -78,7 +78,7 @@ public class SecurityConfig {
                     .requestMatchers(GET, "/order").permitAll() //todo !!!수정필요!!!
                     .requestMatchers(GET, "/member/member-login").permitAll()
                     .requestMatchers(POST, "/member/guest-order").permitAll()
-                    .requestMatchers(POST, "/admin/**").hasAnyRole("ADMIN")
+                    .requestMatchers(POST, "/admin/**").hasRole("ADMIN")
                     .requestMatchers(POST, "/member/signup").permitAll()
                     .requestMatchers(POST, "/member/member-login").hasAnyRole("USER","ADMIN")
                     .anyRequest().authenticated()
@@ -94,7 +94,12 @@ public class SecurityConfig {
             .rememberMe(rememberMe -> rememberMe.key(rememberMeKey)
                 .tokenValiditySeconds(60*60*24*7)
                 .userDetailsService(authService))
-            .logout(LogoutConfigurer::permitAll);
+            .logout(logout ->logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .deleteCookies("remember-me","JSESSIONID")
+                .permitAll()
+            );
         
         return http.build();
     }

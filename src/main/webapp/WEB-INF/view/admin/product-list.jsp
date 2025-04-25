@@ -30,14 +30,13 @@
                         <c:out value="가격 : ${coffee.price}"/>
 
                     <!-- 삭제 버튼 -->
-                <form action="${pageContext.request.contextPath}/admin/product/delete" method="post" style="display:inline;">
-                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                <form:form action="${pageContext.request.contextPath}/admin/product/delete" method="post" style="display:inline;">
 
                 <input type="hidden" name="coffeeName" value="${coffee.name}" />
                     <button type="submit" class="btn-flat red-text" onclick="return confirm('정말 삭제하시겠습니까?');">
                         <i class="material-icons">delete</i>
                     </button>
-                </form>
+                </form:form>
                 </p>
 
                 <a href="#" class="secondary-content"><i class="material-icons">grade</i></a>
