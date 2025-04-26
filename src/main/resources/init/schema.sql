@@ -36,7 +36,9 @@ CREATE TABLE `ORDER` (
 -- 주문 상품 내역 테이블
 CREATE TABLE `ORDER_COFFEE` (
                                 `ORDER_NO` INT NOT NULL comment '주문번호',
-                                `COFFEE_ID` VARCHAR(100) NOT NULL comment '제품번호',
+                                `COFFEE_ID` INT NOT NULL comment '제품번호',
                                 `COFFEE_NAME` VARCHAR(200) NOT NULL comment '제품명',
-                                `QUANTITY` INT NOT NULL DEFAULT 0 comment '수량'
+                                `QUANTITY` INT NOT NULL DEFAULT 0 comment '수량',
+                                FOREIGN KEY (`ORDER_NO`) REFERENCES `ORDER` (`ORDER_NO`) ON DELETE CASCADE,
+                                FOREIGN KEY (`COFFEE_ID`) REFERENCES `COFFEE` (`COFFEE_ID`)
 );
