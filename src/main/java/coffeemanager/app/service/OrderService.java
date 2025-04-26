@@ -6,7 +6,6 @@ import coffeemanager.app.model.coffee.OrderForm;
 import coffeemanager.app.repository.OrderRepository;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    public void processOrder(OrderForm form, List<CartItem> cartItems) {
+    public Order processOrder(OrderForm form, List<CartItem> cartItems) {
         int totalPrice = cartItems.stream()
             .mapToInt(item -> item.getPrice() * item.getQuantity())
             .sum();
@@ -38,5 +37,7 @@ public class OrderService {
             orderRepository.insertOrderCoffee(order.getId(), item.getCoffeeId(),
                 item.getName(), item.getQuantity());
         }
+
+        return order;
     }
 }
