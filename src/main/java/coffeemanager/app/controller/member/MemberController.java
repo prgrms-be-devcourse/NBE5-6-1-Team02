@@ -89,8 +89,15 @@ public class MemberController {
         model.addAttribute("member", member);
         return "member/mypage";
     }
+
     @PostMapping("/guest-order")
     public String processGuest(@RequestParam("email") String email, HttpSession session) {
+
+//        현재 이메일이 DB에 있어도 같은 이메일로 접속 가능함 처리 필요
+//        if(memberService.isDuplicatedId(email)){
+//            return "redirect:/member/guest-login";
+//        }
+
         // 비회원 이메일을 세션에 저장
         session.setAttribute("guestEmail", email);
 
