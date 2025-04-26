@@ -4,11 +4,21 @@
 <head>
     <title>Grepp</title>
     <%@include file="/WEB-INF/view/include/static.jsp" %>
+    <style>
+      .file-path-wrapper {
+        margin-top: 10px;
+      }
+      .file-path {
+        max-width: 560px;
+
+        width: 60%;
+      }
+    </style>
 </head>
 <body>
 <%@include file="/WEB-INF/view/include/header.jsp" %>
 <%@include file="/WEB-INF/view/include/sidenav.jsp" %>
-<main class="container">
+<main class="container" style="margin-top: 150px;">
     <form:form action="/admin/regist" method="post" enctype="multipart/form-data" modelAttribute="ProductForm">
         <div class="file-field input-field">
             <div class="btn">

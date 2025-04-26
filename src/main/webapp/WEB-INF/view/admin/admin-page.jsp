@@ -9,12 +9,7 @@
 <%@include file="/WEB-INF/view/include/header.jsp" %>
 <%@include file="/WEB-INF/view/include/sidenav.jsp" %>
 <main class="container">
-    <c:forEach items="${cookie}" var="c">
-        <h4>
-            <c:out value="${c.value.name}"/>
-            <c:out value="${c.value.value}"/>
-        </h4>
-    </c:forEach>
+<h4>ADMIN DASHBOARD</h4>
 </main>
 <%@include file="/WEB-INF/view/include/footer.jsp" %>
 

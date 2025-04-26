@@ -1,31 +1,55 @@
 <%@ page language="java" %>
+<link rel="stylesheet" href="/assets/css/footer.css">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Test</title>
+</head>
+
+<body>
 <footer class="page-footer">
     <div class="container">
         <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize
-                    your
-                    footer content.</p>
+            <!-- Footer Left Content -->
+            <div class="col l6 s12 footer-left">
+                <h5 class="footer-title">Grepp</h5>
+                <p class="footer-text">Connect with us and explore more!</p>
             </div>
-            <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
+
+            <!-- Footer Links -->
+            <div class="col l3 s12 footer-links">
+                <h5 class="footer-title">Useful Links</h5>
                 <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                    <li><a class="footer-link" href="#!">Link 1</a></li>
+                    <li><a class="footer-link" href="#!">Link 2</a></li>
+                    <li><a class="footer-link" href="#!">Link 3</a></li>
+                    <li><a class="footer-link" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+
+            <!-- Footer Contact Information -->
+            <div class="col l3 s12 footer-contact">
+                <h5 class="footer-title">Contact Us</h5>
+                <ul>
+                    <li><a class="footer-link" href="#!">Email Us</a></li>
+                    <li><a class="footer-link" href="#!">Support</a></li>
+                    <li><a class="footer-link" href="#!">FAQ</a></li>
                 </ul>
             </div>
         </div>
     </div>
+
+    <!-- Footer Copyright -->
     <div class="footer-copyright">
         <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            <p>© 2024 Grepp. All rights reserved.</p>
+            <a class="footer-link right" href="#!">Privacy Policy</a>
         </div>
     </div>
 </footer>
-<script>
-  M.AutoInit();
-</script>
+</body>
+
+</html>

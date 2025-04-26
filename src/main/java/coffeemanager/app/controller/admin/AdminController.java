@@ -30,7 +30,7 @@ public class AdminController {
     @GetMapping()
     public String dashboard() {
 
-        return "admin/dashboard";
+        return "admin/admin-page";
     }
 
     @GetMapping("/coffee/product-regist")

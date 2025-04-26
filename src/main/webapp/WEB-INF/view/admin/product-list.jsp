@@ -4,11 +4,18 @@
 <head>
     <title>Grepp</title>
     <%@include file="/WEB-INF/view/include/static.jsp" %>
+    <style>
+      .price-and-delete {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* 가격과 삭제 버튼 사이 간격 */
+      }
+    </style>
 </head>
 <body>
 <%@include file="/WEB-INF/view/include/header.jsp" %>
 <%@include file="/WEB-INF/view/include/sidenav.jsp" %>
-<main class="container">
+<main class="container" style="margin-top: 80px;">
     <h4>Product List</h4>
     <ul class="collection book-list">
         <c:forEach items="${coffees}" var="coffee">
@@ -19,27 +26,29 @@
 
                 <c:if test="${not empty coffee.img}">
                     <c:forEach items="${coffee.img}" var="image">
-                        <c:if test="${not empty coffee.img}">
-                            <img src="${pageContext.request.contextPath}/upload/${coffee.img}" alt="thumbnail" class="circle">
-                        </c:if>
+                        <img src="${pageContext.request.contextPath}/upload/${coffee.img}" alt="thumbnail" class="circle" style="width: 90px; height: 70px;">
                     </c:forEach>
                 </c:if>
-                <span class="title"><c:out value="상품명 : ${coffee.name}"/></span>
-                <!-- 상품 가격 옆에 삭제 버튼 추가 -->
-                <p>
-                        <c:out value="가격 : ${coffee.price}"/>
 
-                    <!-- 삭제 버튼 -->
-                <form:form action="${pageContext.request.contextPath}/admin/product/delete" method="post" style="display:inline;">
+                <!-- 상품명 + 가격을 세로 정렬 -->
+                <div style="margin-left: 50px;"> <!-- 이미지와 겹치지 않게 왼쪽 여백 -->
+                    <span class="title"><c:out value="상품명 : ${coffee.name}"/></span><br/>
+                    <span><c:out value="가격 : ${coffee.price}"/></span>
+                </div>
 
-                <input type="hidden" name="coffeeName" value="${coffee.name}" />
-                    <button type="submit" class="btn-flat red-text" onclick="return confirm('정말 삭제하시겠습니까?');">
-                        <i class="material-icons">delete</i>
-                    </button>
-                </form:form>
-                </p>
-
-                <a href="#" class="secondary-content"><i class="material-icons">grade</i></a>
+                <!-- 오른쪽 삭제 버튼 + 별 아이콘 -->
+                <span class="secondary-content"
+                      style="display: flex; align-items: center; gap: 10px;">
+        <form:form action="${pageContext.request.contextPath}/admin/product/delete" method="post"
+                   style="margin: 0;">
+            <input type="hidden" name="coffeeName" value="${coffee.name}"/>
+            <button type="submit" class="btn-flat red-text"
+                    onclick="return confirm('정말 삭제하시겠습니까?');">
+                <i class="material-icons" style="font-size: 24px;">delete</i>
+            </button>
+        </form:form>
+        <i class="material-icons" style="font-size: 24px;">grade</i>
+    </span>
             </li>
         </c:forEach>
     </ul>
@@ -57,6 +66,6 @@
 <span class="target" style="display:none;"></span>
 
 <%@include file="/WEB-INF/view/include/footer.jsp" %>
-<script src="${context}/assets/js/book-list.js" defer ></script>
+<script src="${context}/assets/js/book-list.js" defer></script>
 </body>
 </html>
