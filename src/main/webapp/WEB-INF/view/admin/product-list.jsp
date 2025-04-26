@@ -30,7 +30,6 @@
                     </c:forEach>
                 </c:if>
 
-                <!-- 상품명 + 가격을 세로 정렬 -->
                 <div style="margin-left: 50px;"> <!-- 이미지와 겹치지 않게 왼쪽 여백 -->
                     <span class="title"><c:out value="상품명 : ${coffee.name}"/></span><br/>
                     <span><c:out value="가격 : ${coffee.price}"/></span>

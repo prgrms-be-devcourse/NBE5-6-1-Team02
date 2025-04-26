@@ -4,12 +4,9 @@
   padding: 40px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   max-width: 600px;
-  margin: 150px auto 20px; /* margin-top 값을 줄임 */
+  margin: 150px auto 20px;
   text-align: left;
-  /* 필요하다면 position과 top을 사용하여 더 정확하게 위치 조정 */
-  /* position: absolute;
-  top: 100px; */
-  z-index: 10; /* 헤더 위에 표시되도록 z-index 값 증가 */
+  z-index: 10;
 }
 
 .profile-card h4 {

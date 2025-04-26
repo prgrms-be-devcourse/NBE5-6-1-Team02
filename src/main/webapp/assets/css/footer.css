@@ -1,7 +1,7 @@
 /* ===== 푸터 스타일 ===== */
 .page-footer {
-  background-color: #3498db; /* 헤더 상단 색상과 유사한 밝은 파랑 */
-  color: #fff; /* 배경색이 어두워졌으므로 텍스트 색상을 흰색으로 변경 */
+  background-color: #3498db;
+  color: #fff;
   padding: 40px 20px;
   font-family: 'Segoe UI', Arial, sans-serif;
 }
@@ -31,13 +31,13 @@
 }
 
 .footer-link:hover {
-  color: #2980b9; /* 호버 시 약간 어두운 파랑 */
+  color: #2980b9;
   transform: translateX(5px);
 }
 
 /* ===== 푸터 저작권 ===== */
 .footer-copyright {
-  background-color: #2980b9; /* 더 어두운 파랑으로 저작권 부분 강조 */
+  background-color: #2980b9;
   color: #fff;
   padding: 15px 0;
   text-align: center;
