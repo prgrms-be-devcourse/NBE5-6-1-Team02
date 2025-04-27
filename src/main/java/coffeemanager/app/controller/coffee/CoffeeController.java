@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.security.core.Authentication;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
@@ -21,15 +21,15 @@ public class CoffeeController {
 
     @GetMapping("/coffee/order")
     public String coffeeList(Model model, HttpSession session) {
-        // 상품 목록 가져오기
-        List<Coffee> coffeeList = coffeeService.getAllCoffees();
-        model.addAttribute("products", coffeeList);
-
         // 세션에서 비회원 이메일 확인
         String guestEmail = (String) session.getAttribute("guestEmail");
         if (guestEmail != null && !guestEmail.isEmpty()) {
             model.addAttribute("guestEmail", guestEmail);
-        }
+        }else return "redirect:/member/guest-login";
+
+        // 상품 목록 가져오기
+        List<Coffee> coffeeList = coffeeService.getAllCoffees();
+        model.addAttribute("products", coffeeList);
 
         return "coffee/order";
     }
@@ -44,6 +44,9 @@ public class CoffeeController {
         } else {
             email = principal.toString();
         }
+
+        if (email == null || email.isEmpty() || "anonymousUser".equals(email)) return "redirect:/member/member-login";
+
 
         // 상품 목록 가져오기
         List<Coffee> coffeeList = coffeeService.getAllCoffees();
