@@ -12,6 +12,5 @@ public interface OrderRepository {
 
     void insertOrderCoffee(@Param("orderId") Long orderId,
         @Param("coffeeId") Long coffeeId,
-        @Param("coffeeName") String coffeeName,
         @Param("quantity") int quantity);
 }
