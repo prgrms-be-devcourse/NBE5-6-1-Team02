@@ -76,6 +76,11 @@ public class MemberController {
             return "member/signup";
         }
 
+        if(memberService.isDuplicatedId(form.getEmail())){
+            bindingResult.rejectValue("email", "duplicated", "이미 가입된 이메일입니다.");
+            return "member/signup";
+        }
+
         memberService.signup(form.toDto());
 
         return "redirect:/";
