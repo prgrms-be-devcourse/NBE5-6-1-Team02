@@ -53,6 +53,13 @@ public class AdminController {
         return "redirect:/admin/product-list";
     }
 
+    @PostMapping("coffee/activated")
+    public String isFalse(@RequestParam String coffeeName){
+        coffeeService.IsDeleted(coffeeName);
+
+        return "redirect:/admin/product-list";
+    }
+
     @PostMapping("/regist")
     public String regist(@Valid ProductForm form, BindingResult bindingResult
         ,Model model){

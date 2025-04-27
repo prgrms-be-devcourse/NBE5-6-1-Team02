@@ -4,13 +4,13 @@
 <head>
     <title>Grepp</title>
     <%@include file="/WEB-INF/view/include/static.jsp" %>
-    <style>
-      .price-and-delete {
-        display: flex;
-        align-items: center;
-        gap: 10px; /* 가격과 삭제 버튼 사이 간격 */
-      }
-    </style>
+<%--    <style>--%>
+<%--      .price-and-delete {--%>
+<%--        display: flex;--%>
+<%--        align-items: center;--%>
+<%--        gap: 10px;--%>
+<%--      }--%>
+<%--    </style>--%>
 </head>
 <body>
 <%@include file="/WEB-INF/view/include/header.jsp" %>
@@ -26,28 +26,41 @@
 
                 <c:if test="${not empty coffee.img}">
                     <c:forEach items="${coffee.img}" var="image">
-                        <img src="${pageContext.request.contextPath}/upload/${coffee.img}" alt="thumbnail" class="circle" style="width: 90px; height: 70px;">
+                        <img src="${pageContext.request.contextPath}/upload/${coffee.img}"
+                             alt="thumbnail" class="circle" style="width: 90px; height: 70px;">
                     </c:forEach>
                 </c:if>
 
                 <div style="margin-left: 50px;"> <!-- 이미지와 겹치지 않게 왼쪽 여백 -->
                     <span class="title"><c:out value="상품명 : ${coffee.name}"/></span><br/>
-                    <span><c:out value="가격 : ${coffee.price}"/></span>
+                    <span><c:out value="가격 : ${coffee.price}"/></span><br/>
+                    <span><c:out value="상품상태 : ${coffee.active == 1 ? '활성화' : '비활성화'}"/></span>
                 </div>
 
-                <!-- 오른쪽 삭제 버튼 + 별 아이콘 -->
+                <!-- 오른쪽 비활성화 버튼 + 삭제 버튼 -->
                 <span class="secondary-content"
                       style="display: flex; align-items: center; gap: 10px;">
-        <form:form action="${pageContext.request.contextPath}/admin/product/delete" method="post"
-                   style="margin: 0;">
-            <input type="hidden" name="coffeeName" value="${coffee.name}"/>
-            <button type="submit" class="btn-flat red-text"
-                    onclick="return confirm('정말 삭제하시겠습니까?');">
-                <i class="material-icons" style="font-size: 24px;">delete</i>
-            </button>
-        </form:form>
-        <i class="material-icons" style="font-size: 24px;">grade</i>
-    </span>
+
+                    <!-- 비활성화 상태일 때 비활성화 버튼 표시 -->
+                    <c:if test="${coffee.active == 1}">
+                        <form:form action="${pageContext.request.contextPath}/admin/coffee/activated" method="post" style="margin: 0;">
+                            <input type="hidden" name="coffeeName" value="${coffee.name}"/>
+                            <button type="submit" class="btn-flat red-text" onclick="return confirm('정말 비활성화하시겠습니까?');">
+                                <i class="material-icons" style="font-size: 24px;">delete</i> 비활성화
+                            </button>
+                        </form:form>
+                    </c:if>
+
+                    <!-- 비활성화 상태일 때만 삭제 버튼 표시 -->
+                    <c:if test="${coffee.active == 0}">
+                        <form:form action="${pageContext.request.contextPath}/admin/product/delete" method="post" style="margin: 0;">
+                            <input type="hidden" name="coffeeName" value="${coffee.name}"/>
+                            <button type="submit" class="btn-flat red-text" onclick="return confirm('정말 삭제하시겠습니까?');">
+                                <i class="material-icons" style="font-size: 24px;">delete_forever</i> 삭제
+                            </button>
+                        </form:form>
+                    </c:if>
+                </span>
             </li>
         </c:forEach>
     </ul>

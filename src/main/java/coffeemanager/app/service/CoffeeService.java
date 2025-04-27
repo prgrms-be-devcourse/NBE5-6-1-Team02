@@ -28,4 +28,10 @@ public class CoffeeService {
     public void deleteCoffeeName(String coffeeName) {
         coffeeRepository.deleteCoffeeByName(coffeeName);
     }
+
+    public void IsDeleted(String name){
+        coffeeRepository.is_deleted(name);
+    }
+
+
 }

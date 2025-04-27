@@ -16,7 +16,7 @@ public interface ProductRepository {
     @Options(useGeneratedKeys = true, keyColumn = "COFFEE_ID", keyProperty = "cpIdx")
     void insert(Product product);
 
-    @Select("select form COFFEE_IMG from COFFEE WHERE COFFEE_NAME = #{name}")
+    @Select("select COFFEE_IMG from COFFEE WHERE COFFEE_NAME = #{name}")
     void findByImage(String name);
 
 }

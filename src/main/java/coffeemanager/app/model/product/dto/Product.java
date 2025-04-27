@@ -11,6 +11,7 @@ public class Product {
     private String Img;
     private String name;
     private int price;
+    private boolean active;
 
     public Product(String name, int price) {
         this.name = name;
