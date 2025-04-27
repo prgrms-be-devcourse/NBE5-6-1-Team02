@@ -1,0 +1,209 @@
+/* ===== 공통 초기화 및 기본 설정 ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button, input, select {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+/* ===== 레이아웃 ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 150px 20px 20px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  color: #2c3e50;
+  font-size: 2.5em;
+  margin: 40px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-text {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* ===== 버튼 공통 스타일 ===== */
+.login-btn,
+.logout-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #3498db;
+  color: white;
+  font-size: 1.1em;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-btn:hover,
+.logout-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== 헤더 ===== */
+.page-header {
+  position: relative;
+  width: 100%;
+  min-height: 150px;
+  background-color: #fff;
+  z-index: 0;
+}
+
+.header-decoration {
+  background: linear-gradient(135deg, #3498db, #9b59b6);
+  height: 150px;
+  border-radius: 0 0 50% 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.nav-container {
+  position: relative;
+  z-index: 2;
+  background-color: #fff;
+  padding: 20px 0;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-logo {
+  color: #fff;
+  font-size: 2.2em;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  z-index: 3;
+  position: relative;
+}
+
+.brand-logo:hover {
+  color: #ecf0f1;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  z-index: 3;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links li a {
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ===== 햄버거 메뉴 ===== */
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 4;
+}
+
+.hamburger-menu span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+/* ===== 반응형 ===== */
+@media screen and (max-width: 768px) {
+  .hamburger-menu {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    background-color: #3498db;
+    padding: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .nav-links li a,
+  .logout-btn {
+    display: block;
+    padding: 12px;
+    font-size: 1.2em;
+  }
+}

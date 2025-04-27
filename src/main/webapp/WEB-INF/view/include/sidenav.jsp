@@ -16,6 +16,10 @@
     </li>
     <li><a class="subheader">상품</a></li>
     <li><a class="waves-effect" href="/coffee/member-order">상품주문하기</a></li>
+
+        <sec:authorize access="hasRole('USER')">
+            <li><a href="/member/member-delete" class="nav-link">회원 탈퇴</a></li>
+        </sec:authorize>
 </ul>
 <script>
   document.addEventListener('DOMContentLoaded', function () {

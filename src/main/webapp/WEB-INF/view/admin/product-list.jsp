@@ -8,8 +8,8 @@
 <body>
 <%@include file="/WEB-INF/view/include/header.jsp" %>
 <%@include file="/WEB-INF/view/include/sidenav.jsp" %>
-<main class="container">
-    <h4>Product List</h4>
+<main class="container" style="margin-top: 80px;">
+    <h4>등록된 상품 목록</h4>
     <ul class="collection book-list">
         <c:forEach items="${coffees}" var="coffee">
             <li class="collection-item avatar">
@@ -19,27 +19,48 @@
 
                 <c:if test="${not empty coffee.img}">
                     <c:forEach items="${coffee.img}" var="image">
-                        <c:if test="${not empty coffee.img}">
-                            <img src="${pageContext.request.contextPath}/upload/${coffee.img}" alt="thumbnail" class="circle">
-                        </c:if>
+                        <img src="${pageContext.request.contextPath}/upload/${coffee.img}"
+                             alt="thumbnail" class="circle" style="width: 90px; height: 70px;">
                     </c:forEach>
                 </c:if>
-                <span class="title"><c:out value="상품명 : ${coffee.name}"/></span>
-                <!-- 상품 가격 옆에 삭제 버튼 추가 -->
-                <p>
-                        <c:out value="가격 : ${coffee.price}"/>
 
-                    <!-- 삭제 버튼 -->
-                <form:form action="${pageContext.request.contextPath}/admin/product/delete" method="post" style="display:inline;">
+                <div style="margin-left: 50px;"> <!-- 이미지와 겹치지 않게 왼쪽 여백 -->
+                    <span class="title"><c:out value="${coffee.name}"/></span><br/>
+                    <span><c:out value="가격 : ${coffee.price} 원"/></span><br/>
+                    <span><c:out value="상품상태 : ${coffee.active == 1 ? '활성화' : '비활성화'}"/></span>
+                </div>
 
-                <input type="hidden" name="coffeeName" value="${coffee.name}" />
-                    <button type="submit" class="btn-flat red-text" onclick="return confirm('정말 삭제하시겠습니까?');">
-                        <i class="material-icons">delete</i>
-                    </button>
-                </form:form>
-                </p>
+                <!-- 오른쪽 비활성화 버튼 + 삭제 버튼 -->
+                <span class="secondary-content"
+                      style="display: flex; align-items: center; gap: 15px;">
 
-                <a href="#" class="secondary-content"><i class="material-icons">grade</i></a>
+                    <c:if test="${coffee.active == 1}">
+                        <form:form action="${pageContext.request.contextPath}/admin/product/activated" method="post"
+                                   style="margin: 0;">
+                            <input type="hidden" name="coffeeName" value="${coffee.name}"/>
+                            <button type="submit" class="btn-flat red-text"
+                                    style="padding: 5px 10px; font-size: 14px; min-width: 120px;"
+                                    onclick="return confirm('정말 비활성화하시겠습니까?');">
+                                <i class="material-icons" style="font-size: 18px;">delete_forever</i> 비활성화
+                            </button>
+                        </form:form>
+                    </c:if>
+
+
+                    <c:if test="${coffee.active == 0}">
+                        <form:form action="${pageContext.request.contextPath}/admin/product/re-activated" method="post"
+                                   style="margin: 0;">
+                            <input type="hidden" name="coffeeName" value="${coffee.name}"/>
+                            <button type="submit" class="btn-flat red-text"
+                                    style="padding: 5px 10px; font-size: 14px; min-width: 120px;"
+                                    onclick="return confirm('정말 활성화하시겠습니까?');">
+                                <i class="material-icons" style="font-size: 18px;">replay</i> 활성화
+                            </button>
+                        </form:form>
+                    </c:if>
+
+                </span>
+
             </li>
         </c:forEach>
     </ul>
@@ -57,6 +78,6 @@
 <span class="target" style="display:none;"></span>
 
 <%@include file="/WEB-INF/view/include/footer.jsp" %>
-<script src="${context}/assets/js/book-list.js" defer ></script>
+<script src="${context}/assets/js/book-list.js" defer></script>
 </body>
 </html>

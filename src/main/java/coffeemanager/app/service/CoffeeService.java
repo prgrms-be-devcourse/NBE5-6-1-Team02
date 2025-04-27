@@ -21,6 +21,10 @@ public class CoffeeService {
         return coffeeRepository.findAllCoffees();
     }
 
+    public List<Coffee> getActivatedCoffees() {
+        return coffeeRepository.findActivatedCoffees();
+    }
+
     public Coffee getCoffeeById(int coffeeId) {
         return coffeeRepository.findCoffeeById(coffeeId);
     }
@@ -28,4 +32,14 @@ public class CoffeeService {
     public void deleteCoffeeName(String coffeeName) {
         coffeeRepository.deleteCoffeeByName(coffeeName);
     }
+
+    public void UnActive(String name){
+        coffeeRepository.un_active(name);
+    }
+
+    public void ReActive(String name){
+        coffeeRepository.re_active(name);
+    }
+
+
 }

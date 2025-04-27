@@ -30,7 +30,7 @@ public class AdminController {
     @GetMapping()
     public String dashboard() {
 
-        return "admin/dashboard";
+        return "admin/admin-page";
     }
 
     @GetMapping("/coffee/product-regist")
@@ -46,9 +46,26 @@ public class AdminController {
         return "admin/product-list";
     }
 
+    // 삭제
     @PostMapping("product/delete")
     public String deleteProduct(@RequestParam String coffeeName){
         coffeeService.deleteCoffeeName(coffeeName);
+
+        return "redirect:/admin/product-list";
+    }
+
+    // 비활성화
+    @PostMapping("product/activated")
+    public String isFalse(@RequestParam String coffeeName){
+        coffeeService.UnActive(coffeeName);
+
+        return "redirect:/admin/product-list";
+    }
+
+    // 재활성화
+    @PostMapping("product/re-activated")
+    public String isTrue(@RequestParam String coffeeName){
+        coffeeService.ReActive(coffeeName);
 
         return "redirect:/admin/product-list";
     }
@@ -64,9 +81,5 @@ public class AdminController {
         productService.registProduct(form.getPd_Img(), form.toDto());
         return "redirect:/admin";
     }
-
-
-
-    
 
 }

@@ -22,6 +22,7 @@ public class MemberService{
     
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
+    private Member member;
     
     @Transactional
     public void signup(Member dto) {
@@ -59,4 +60,14 @@ public class MemberService{
         memberRepository.update(dto);
     }
 
+    public void delete(String email, String password) {
+        Member member = memberRepository.findByEmail(email)
+            .orElseThrow(() -> new CommonException(ResponseCode.BAD_REQUEST));
+
+        if (!passwordEncoder.matches(password, member.getPassword())) {
+            throw new CommonException(ResponseCode.BAD_REQUEST);
+        }
+
+        memberRepository.delete(member.getEmail());
+    }
 }

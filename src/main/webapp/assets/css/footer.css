@@ -1,0 +1,76 @@
+/* ===== 푸터 스타일 ===== */
+.page-footer {
+  background-color: #3498db;
+  color: #fff;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.footer-title {
+  color: #fff;
+  font-size: 1.6em;
+  margin-bottom: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.footer-text {
+  color: #ecf0f1;
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.footer-link {
+  color: #fff;
+  font-size: 1.1em;
+  text-decoration: none;
+  margin-bottom: 12px;
+  display: block;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #2980b9;
+  transform: translateX(5px);
+}
+
+/* ===== 푸터 저작권 ===== */
+.footer-copyright {
+  background-color: #2980b9;
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: 300;
+}
+
+.footer-copyright a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-copyright a:hover {
+  color: #ecf0f1;
+}
+
+/* ===== 반응형 디자인 ===== */
+@media screen and (max-width: 768px) {
+  .footer-title {
+    font-size: 1.4em;
+  }
+
+  .footer-text {
+    font-size: 0.9em;
+  }
+
+  .footer-link {
+    font-size: 1em;
+  }
+
+  .footer-copyright {
+    font-size: 1em;
+  }
+}

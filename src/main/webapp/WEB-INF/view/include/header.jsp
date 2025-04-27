@@ -1,46 +1,43 @@
 <%@ page language="java" %>
+<link rel="stylesheet" href="/assets/css/header.css">
 <header class="header">
-    <nav class="navbar white">
-        <div class="nav-wrapper ">
-            <a href="/" class="brand-logo grey-text">Grepp</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down grey-text">
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo">Grepp</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <!-- 비로그인 사용자 -->
                 <sec:authorize access="isAnonymous()">
-                    <li><a href="/member/signin" class="grey-text">sign in</a></li>
-                    <li><a href="/member/signup" class="grey-text">sign up</a></li>
-                    <li>
-                        <a href="mobile.html">
-                            <i class="material-icons grey-text sidenav-trigger"
-                               data-target="slide-out">more_vert</i>
-                        </a>
-                    </li>
+                    <li><a href="/member/signin" class="nav-link">Sign In</a></li>
+                    <li><a href="/member/signup" class="nav-link">Sign Up</a></li>
                 </sec:authorize>
+
+                <!-- 로그인한 사용자 (일반 사용자) -->
                 <sec:authorize access="hasRole('USER')">
-                    <li><a href="/member/fixinfo" class="grey-text">fixinfo</a></li>
-
-                    <li><a href="/coffee/member-order" class="grey-text">order</a></li>
-
+                    <li><a href="/member/fixinfo" class="nav-link">Fix Info</a></li>
+                    <li><a href="/coffee/member-order" class="nav-link">Order</a></li>
                 </sec:authorize>
+
+                <!-- 관리자 -->
                 <sec:authorize access="hasRole('ADMIN')">
-                    <li><a href="/admin/product-list" class="grey-text">List</a></li>
-                    <li><a href="/admin/coffee/product-regist" class="grey-text">Regist</a></li>
+                    <li><a href="/admin/product-list" class="nav-link">List</a></li>
+                    <li><a href="/admin/coffee/product-regist" class="nav-link">Regist</a></li>
                 </sec:authorize>
 
+                <!-- 로그인한 사용자 (로그아웃 포함) -->
                 <sec:authorize access="isAuthenticated()">
                     <li>
                         <form:form action="/logout" method="POST" style="display:inline;">
-                            <button type="submit" class="grey-text" style="background:none; border:none; color: inherit; font-size: inherit; cursor: pointer;">logout</button>
+                            <button type="submit" class="nav-link logout-btn">Logout</button>
                         </form:form>
                     </li>
                 </sec:authorize>
+
                 <li>
                     <a href="mobile.html">
-                        <i class="material-icons grey-text sidenav-trigger"
-                           data-target="slide-out">more_vert</i>
+                        <i class="material-icons sidenav-trigger" data-target="slide-out">more_vert</i>
                     </a>
                 </li>
-
             </ul>
         </div>
     </nav>
 </header>
-

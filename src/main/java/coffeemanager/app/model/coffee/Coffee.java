@@ -10,4 +10,5 @@ public class Coffee {
     private String img;//
     private String name;     // COFFEE_NAME에 매핑
     private int price;       // PRICE에 매핑
+    private int active;
 }

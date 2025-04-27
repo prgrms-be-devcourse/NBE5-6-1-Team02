@@ -7,10 +7,21 @@
     SELECT
       COFFEE_IMG as img,
       COFFEE_ID as cpIdx,
-      COFFEE_IMG as img,
       COFFEE_NAME as name,
-      PRICE as price
+      PRICE as price,
+      ACTIVE as active
     FROM COFFEE
+  </select>
+
+  <select id="findActivatedCoffees" resultType="coffeemanager.app.model.coffee.Coffee">
+    SELECT
+    COFFEE_IMG as img,
+    COFFEE_ID as cpIdx,
+    COFFEE_NAME as name,
+    PRICE as price,
+    ACTIVE as active
+    FROM COFFEE
+    WHERE active = 1
   </select>
 
   <select id="findCoffeeById" parameterType="int" resultType="coffeemanager.app.model.coffee.Coffee">

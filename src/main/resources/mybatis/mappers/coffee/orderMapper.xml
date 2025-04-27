@@ -10,8 +10,8 @@
   </insert>
 
   <insert id="insertOrderCoffee">
-    INSERT INTO `order_coffee` (order_no, coffee_name, coffee_id, quantity)
-    VALUES (#{orderId}, #{coffeeName}, #{coffeeId}, #{quantity})
+    INSERT INTO `order_coffee` (order_no, coffee_id, quantity)
+    VALUES (#{orderId}, #{coffeeId}, #{quantity})
   </insert>
 
 </mapper>
