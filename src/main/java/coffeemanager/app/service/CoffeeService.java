@@ -21,6 +21,10 @@ public class CoffeeService {
         return coffeeRepository.findAllCoffees();
     }
 
+    public List<Coffee> getActivatedCoffees() {
+        return coffeeRepository.findActivatedCoffees();
+    }
+
     public Coffee getCoffeeById(int coffeeId) {
         return coffeeRepository.findCoffeeById(coffeeId);
     }
