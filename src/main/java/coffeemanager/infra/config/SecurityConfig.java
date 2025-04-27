@@ -91,6 +91,7 @@ public class SecurityConfig {
                     .requestMatchers(GET, "/order").permitAll() //todo !!!수정필요!!!
                     .requestMatchers(GET, "/coffee/order-result").permitAll()
                     .requestMatchers(GET, "/member/member-login").permitAll()
+                    .requestMatchers(GET, "/member/delete").hasRole("USER")
                     .requestMatchers(POST, "/member/guest-order").permitAll()
                     .requestMatchers(POST, "/admin/**").hasRole("ADMIN")
                     .requestMatchers(POST, "/member/signup").permitAll()
