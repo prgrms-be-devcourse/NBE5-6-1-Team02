@@ -88,7 +88,7 @@ public class SecurityConfig {
                     .requestMatchers(GET, "/admin/**").hasAnyRole("ADMIN")
                     .requestMatchers(GET, "/member/guest-login").permitAll()
                     .requestMatchers(GET, "/coffee/order").permitAll()
-                    .requestMatchers(GET, "/order").permitAll() //todo !!!수정필요!!!
+                    .requestMatchers(GET, "/order").permitAll()
                     .requestMatchers(GET, "/coffee/order-result").permitAll()
                     .requestMatchers(POST, "/order").permitAll()
                     .requestMatchers(GET, "/member/member-login").permitAll()
