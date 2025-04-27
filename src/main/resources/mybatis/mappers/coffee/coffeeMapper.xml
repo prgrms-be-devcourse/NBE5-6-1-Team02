@@ -9,7 +9,8 @@
       COFFEE_ID as cpIdx,
       COFFEE_IMG as img,
       COFFEE_NAME as name,
-      PRICE as price
+      PRICE as price,
+      ACTIVE as active
     FROM COFFEE
   </select>
 

@@ -19,7 +19,8 @@ CREATE TABLE `COFFEE` (
                           `COFFEE_ID` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '제품번호',
                           `COFFEE_IMG` VARCHAR(255) COMMENT '제품 이미지 경로',
                           `COFFEE_NAME` VARCHAR(200) NOT NULL COMMENT '제품명',
-                          `PRICE` INT NOT NULL COMMENT '가격'
+                          `PRICE` INT NOT NULL COMMENT '가격',
+                          `ACTIVE` bool NOT NULL DEFAULT true COMMENT '상품 활성화 여부'
 );
 
 
