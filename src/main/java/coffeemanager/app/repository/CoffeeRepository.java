@@ -17,5 +17,8 @@ public interface CoffeeRepository {
     void deleteCoffeeByName(String coffeeName);
 
     @Update("update COFFEE SET ACTIVE=false WHERE COFFEE_NAME =#{name}")
-    void is_deleted(String name);
+    void un_active(String name);
+
+    @Update("update COFFEE SET ACTIVE=true WHERE COFFEE_NAME =#{name}")
+    void re_active(String name);
 }

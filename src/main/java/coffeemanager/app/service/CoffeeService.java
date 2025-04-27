@@ -29,8 +29,12 @@ public class CoffeeService {
         coffeeRepository.deleteCoffeeByName(coffeeName);
     }
 
-    public void IsDeleted(String name){
-        coffeeRepository.is_deleted(name);
+    public void UnActive(String name){
+        coffeeRepository.un_active(name);
+    }
+
+    public void ReActive(String name){
+        coffeeRepository.re_active(name);
     }
 
 
