@@ -186,8 +186,19 @@
             </div>
 
             <div style="text-align:center; margin-top:30px;">
-                <a href="${pageContext.request.contextPath}/" class="home-btn">홈으로 돌아가기</a>
+                <a href="${pageContext.request.contextPath}/" onclick="clearOrderSession(); return true;" class="home-btn">홈으로 돌아가기</a>
             </div>
+            <script>
+              function clearOrderSession() {
+                // AJAX로 세션 초기화 요청
+                fetch('${pageContext.request.contextPath}/clear-order-session', {
+                  method: 'POST',
+                  headers: {
+                    'X-CSRF-TOKEN': '${_csrf.token}'
+                  }
+                });
+              }
+            </script>
         </div>
     </div>
 </div>

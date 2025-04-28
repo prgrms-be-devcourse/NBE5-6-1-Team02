@@ -88,9 +88,11 @@ public class SecurityConfig {
                     .requestMatchers(GET, "/admin/**").hasAnyRole("ADMIN")
                     .requestMatchers(GET, "/member/guest-login").permitAll()
                     .requestMatchers(GET, "/coffee/order").permitAll()
-                    .requestMatchers(GET, "/order").permitAll() //todo !!!수정필요!!!
+                    .requestMatchers(GET, "/order").permitAll()
+                    .requestMatchers(POST, "/order").permitAll()
                     .requestMatchers(GET, "/coffee/order-result").permitAll()
                     .requestMatchers(GET, "/member/member-login").permitAll()
+                    .requestMatchers(POST, "/clear-order-session").permitAll() // 세션 초기화 엔드포인트 허용
                     .requestMatchers(GET, "/member/delete").hasRole("USER")
                     .requestMatchers(POST, "/member/guest-order").permitAll()
                     .requestMatchers(POST, "/admin/**").hasRole("ADMIN")
