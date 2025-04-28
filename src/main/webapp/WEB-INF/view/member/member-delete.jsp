@@ -12,7 +12,6 @@
   <div class="header-decoration"></div>
   <h2>회원 탈퇴</h2>
 
-  <!-- 탈퇴 폼 시작 -->
   <form:form modelAttribute="deleteForm" method="post" action="/member/delete">
 
     <div class="form-group">
@@ -24,7 +23,6 @@
     <button type="submit" class="signup-btn">회원 탈퇴</button>
   </form:form>
 
-  <!-- 에러 메시지 표시 -->
   <c:if test="${not empty errorMessage}">
     <div class="error-message" style="color:red; margin-top:15px;">${errorMessage}</div>
     <c:remove var="errorMessage" scope="session"/>
