@@ -103,7 +103,7 @@ public class OrderController {
         session.removeAttribute("orderEmail");
         session.removeAttribute("orderItems");
         session.removeAttribute("orderTime");
-
+        session.removeAttribute("guestEmail");
 
         // 로그아웃 처리
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
