@@ -83,7 +83,7 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(
                 (requests) -> requests
-                    .requestMatchers(GET, "/", "/assets/**", "/download/**").permitAll()
+                    .requestMatchers(GET, "/", "/assets/**", "/upload/**").permitAll()
                     .requestMatchers(GET, "/member/signup").permitAll()
                     .requestMatchers(GET, "/admin/**").hasAnyRole("ADMIN")
                     .requestMatchers(GET, "/member/guest-login").permitAll()
