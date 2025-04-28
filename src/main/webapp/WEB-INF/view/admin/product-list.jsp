@@ -9,7 +9,7 @@
 <%@include file="/WEB-INF/view/include/header.jsp" %>
 <%@include file="/WEB-INF/view/include/sidenav.jsp" %>
 <main class="container" style="margin-top: 80px;">
-    <h4>Product List</h4>
+    <h4>등록된 상품 목록</h4>
     <ul class="collection book-list">
         <c:forEach items="${coffees}" var="coffee">
             <li class="collection-item avatar">
@@ -25,8 +25,8 @@
                 </c:if>
 
                 <div style="margin-left: 50px;"> <!-- 이미지와 겹치지 않게 왼쪽 여백 -->
-                    <span class="title"><c:out value="상품명 : ${coffee.name}"/></span><br/>
-                    <span><c:out value="가격 : ${coffee.price}"/></span><br/>
+                    <span class="title"><c:out value="${coffee.name}"/></span><br/>
+                    <span><c:out value="가격 : ${coffee.price} 원"/></span><br/>
                     <span><c:out value="상품상태 : ${coffee.active == 1 ? '활성화' : '비활성화'}"/></span>
                 </div>
 
@@ -34,7 +34,6 @@
                 <span class="secondary-content"
                       style="display: flex; align-items: center; gap: 15px;">
 
-                    <!-- 비활성화 상태일 때 비활성화 버튼 표시 -->
                     <c:if test="${coffee.active == 1}">
                         <form:form action="${pageContext.request.contextPath}/admin/product/activated" method="post"
                                    style="margin: 0;">
@@ -48,21 +47,7 @@
                     </c:if>
 
 
-                    <!-- 비활성화 상태일 때만 삭제 버튼 표시 -->
                     <c:if test="${coffee.active == 0}">
-                        <form:form action="${pageContext.request.contextPath}/admin/product/delete" method="post"
-                                   style="margin: 0;">
-                            <input type="hidden" name="coffeeName" value="${coffee.name}"/>
-                            <button type="submit" class="btn-flat red-text"
-                                    style="padding: 5px 10px; font-size: 14px; min-width: 120px;"
-                                    onclick="return confirm('정말 삭제하시겠습니까?');">
-                                <i class="material-icons" style="font-size: 18px;">delete_forever</i> 삭제
-                            </button>
-                        </form:form>
-
-                        <!-- 구분선 -->
-                        <span style="font-size: 20px; color: #ccc;">|</span>
-
                         <form:form action="${pageContext.request.contextPath}/admin/product/re-activated" method="post"
                                    style="margin: 0;">
                             <input type="hidden" name="coffeeName" value="${coffee.name}"/>

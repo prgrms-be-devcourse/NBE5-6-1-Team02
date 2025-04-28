@@ -11,6 +11,9 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface CoffeeRepository {
     List<Coffee> findAllCoffees();
+
+    List<Coffee> findActivatedCoffees();
+
     Coffee findCoffeeById(int coffeeId);
 
     @Delete("delete from coffee where coffee_name = #{coffeeName}")
